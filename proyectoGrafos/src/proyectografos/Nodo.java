@@ -8,12 +8,12 @@ package proyectografos;
  *
  * @author diego
  */
-public class Node <T> {
+public class Nodo <T> {
     protected T tInfo;
-    protected Node <T> pNext;
+    protected Nodo <T> pNext;
     
     //Constructor
-    public Node(T elem){
+    public Nodo(T elem){
         this.tInfo=elem;
         this.pNext=null;
         
