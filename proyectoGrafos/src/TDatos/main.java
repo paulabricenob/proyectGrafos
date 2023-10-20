@@ -10,7 +10,7 @@ package TDatos;
  */
 public class main {
     public static void main(String[]args){
-    Grafo g = new Grafo(8);
+    Grafo g = new Grafo(20);
     g.showGraph();
       }
 }
