@@ -76,7 +76,7 @@ public class Grafo {
 				
 				actual = actual.getNext();
 			}
-			System.out.println();
+			System.out.println(Graph);
 		}
 	}
 }
