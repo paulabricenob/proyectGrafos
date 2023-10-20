@@ -66,6 +66,13 @@ public class Grafo {
 			System.out.println("Error, arista ya creada" + s1 + "" + s2);
 		}
 	}
+    
+    public void deleteGraph(){
+		for(int i = 0; i < Graph.length; i++){			
+			Graph[i] = null;		
+		}
+	}
+    
     public void showGraph(){
 		for(int i = 0; i < Graph.length; i++){
 			Nodo actual = Graph[i];
