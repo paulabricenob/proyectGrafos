@@ -3,20 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package TDatos;
-
+import Objetos.Funciones;
+import Objetos.Arco;
+import Objetos.NodoPersona;
+import javax.swing.JOptionPane;
 
 public class Grafo {
-    private int numVertex;
-    private Nodo Graph[];
+    private Lista<NodoPersona> Usuarios;
 
+    public Grafo() {
+        this.Usuarios = new Lista();
+    }  
 
-    public int getNumVertex() {
-        return numVertex;
+    public Lista getusuarios() {
+        return Usuarios;
     }
 
-    public void setNumVertex(int numVertex) {
-        this.numVertex = numVertex;
+    public void setususarios(Lista Usuarios) {
+        this.Usuarios = Usuarios;
     }
+
+
 
     public Nodo[] getGraph() {
         return Graph;
@@ -67,11 +74,7 @@ public class Grafo {
 		}
 	}
     
-    public void deleteGraph(){
-		for(int i = 0; i < Graph.length; i++){			
-			Graph[i] = null;		
-		}
-	}
+
     
     public void showGraph(){
 		for(int i = 0; i < Graph.length; i++){

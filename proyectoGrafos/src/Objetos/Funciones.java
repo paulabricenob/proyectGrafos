@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package proyectografos;
+package Objetos;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,7 +21,7 @@ public class Funciones {
         if (!users.isEmpty()){
             NodoPersona temp = users.getpFirst();
             for (int i=0; i <users.getiN(); i++){
-                current_users += temp.getName()+ "," + temp.getRelations() + "\n";
+                current_users += temp.getName()+ "," + temp.getconocidos() + "\n";
                 temp = temp.getPnext();
             }
                   

@@ -4,6 +4,9 @@
  */
 package TDatos;
 
+import Objetos.NodoPersona;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Enzo
@@ -184,3 +187,20 @@ public class Lista<T> {
     }    
 
 }
+//  public void show_elements(){
+//       if(isEmpty()){
+//            JOptionPane.showMessageDialog(null, "La lista está vacía");
+//        }else{
+//            NodoPersona chain ;
+//            chain = getpFirst();
+//            String show_element = "";
+//            for (int i=0; i<getiN(); i++){
+//                show_element += "Nombre:" + chain.getName()+ "\n Relaciones: " + chain.getconocidos()+ "\n";
+//                chain = chain.getPnext();
+//                JOptionPane.showMessageDialog(null, show_element);
+//                
+//            }
+//        }
+//    }
+ 
+    
