@@ -186,6 +186,55 @@ public class Lista<T> {
         return 0;
     }    
 
+    
+    public void replace(int position, T data){
+        boolean run = true;
+ 
+        while(run == true){
+            if(position < 0 || position >= len()){
+                run = false;
+            }
+            else{
+                if(position == 0){
+                    head.setData(data);
+                    run = false;
+                }
+                else if(position == len()-1){
+                    tail.setData(data);
+                    run = false;
+                }
+                else{
+                    Nodo pointer = head;
+                    for(int x = 0; x < position; x++){
+                        pointer = pointer.getNext();
+                    }
+                    pointer.setData(data);
+                    run = false;
+                }
+            }
+        }
+    }    
+
+    public boolean exist(T data){
+        if(head.getData() == data){
+            return true;
+        }
+        else if(tail.getData() == data){
+            return true;
+        }
+        else{
+            Nodo pointer = head;
+            for(int x = 0; x < len(); x++){
+                if(pointer.getData() == data){
+                    return true;
+                }
+                pointer = pointer.getNext();
+            }
+        }
+        return false;
+    }
+    
+
 }
 //  public void show_elements(){
 //       if(isEmpty()){

@@ -49,5 +49,9 @@ public class NodoPersona {
     public void addToconocidos(Arco Arco){
         this.conocidos.append(Arco);
     }
+
+    public void setconocidos(Lista conocidos) {
+        this.conocidos = conocidos;
+    }
     
 }
