@@ -6,7 +6,7 @@ package proyectografos;
 
 /**
  *
- * @author diego
+ * @author paula
  */
 public class ProyectoGrafos {
 
