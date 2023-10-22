@@ -2,26 +2,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package proyectografos;
+package Objetos;
+import TDatos.Lista;
 
+        
 /**
  *
  * @author diego
  */
 public class NodoPersona {
     private String name;
+    private int id;
     private NodoPersona pnext;
-    private String relations;
+    private Lista<Arco> conocidos;
     
-    public NodoPersona(String name, String relations){
+    public NodoPersona(String name, Lista conocidos, int id){
         this.name = name;
         this.pnext = null;
-        this.relations = relations;
-       
+        this.conocidos = conocidos;
+        this.id = id;
     }
     
     public String getName() {
         return name;
+    }
+    
+    public int getid() {
+        return id;
     }
 
     public void setName(String name) {
@@ -35,14 +42,16 @@ public class NodoPersona {
     public void setPnext(NodoPersona pnext) {
         this.pnext = pnext;
     }
-
-    public String getRelations() {
-        return relations;
-    }
-
-    public void setRelations(String relations) {
-        this.relations = relations;
+    public Lista getconocidos() {
+        return conocidos;
     }
     
+    public void addToconocidos(Arco Arco){
+        this.conocidos.append(Arco);
+    }
+
+    public void setconocidos(Lista conocidos) {
+        this.conocidos = conocidos;
+    }
     
 }
