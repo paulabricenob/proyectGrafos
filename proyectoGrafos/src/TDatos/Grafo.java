@@ -23,7 +23,11 @@ public class Grafo {
     public void setususarios(Lista Usuarios) {
         this.Usuarios = Usuarios;
     }
-
+    
+    public boolean isEmpty(){
+        return Usuarios == null;
+    }
+    
     public int UbicacionUsuario(int id){
         for(int x = 0; x < Usuarios.len(); x++){
             if(Usuarios.get(x).getid() == id){

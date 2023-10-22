@@ -4,13 +4,20 @@
  */
 package Objetos;
 
+
+import TDatos.Grafo;
+import Objetos.NodoPersona;
+import TDatos.Lista;
+import TDatos.Nodo;
+import proyectografos.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+//import java.io.FileWriter;
 import java.io.PrintWriter;
+//import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import TDatos.Grafo;
-import TDatos.Lista;
+import java.io.IOException;
 
 /**
  *
@@ -18,15 +25,17 @@ import TDatos.Lista;
  */
 public class Funciones {
     //escribir en el txt
-    public void write_txt(ListaPersonas users){
+    public void write_txt(Lista Usuarios){
         String current_users = "";
-        if (!users.isEmpty()){
-            NodoPersona temp = users.getpFirst();
-            for (int i=0; i <users.getiN(); i++){
-                current_users += temp.getName()+ "," + temp.getconocidos() + "\n";
-                temp = temp.getPnext();
+        if (!Usuarios.isEmpty()){
+            for (int x=0; x <Usuarios.getSize(); x++){
+                NodoPersona persona = (NodoPersona) Usuarios.get(x); 
+                current_users += persona.getName()+"\n";
             }
-                  
+            for (int x=0; x <Usuarios.getSize(); x++){
+                NodoPersona persona = (NodoPersona) Usuarios.get(x); 
+                current_users += persona.getName() + "," + persona.getconocidos() + "\n";
+            }      
         }
         try{
            PrintWriter pw= new PrintWriter("test\\usuarios.txt");
@@ -40,7 +49,7 @@ public class Funciones {
            // revisar si podemos usar JOption Pane
            JOptionPane.showMessageDialog(null, "Guardado exitoso");
                      
-        }catch(Exception err){
+        }catch(IOException err){
             //muestra el error
             JOptionPane.showMessageDialog(null, err);
         }
@@ -48,8 +57,8 @@ public class Funciones {
     }
     
     //leer el txt
-    public ListaPersonas read_txt(){
-        ListaPersonas users = new ListaPersonas();
+    public Lista read_txt(){
+        Lista users = new Lista();
         String line;
         String usuarios_txt = "";
         String path = "test\\usuarios.txt";
@@ -71,35 +80,63 @@ public class Funciones {
                     String[] users_split = usuarios_txt.split("\n");
                     for (int i=0; i < users_split.length; i++){
                         String [] user = users_split[i].split(",");
-                        users.insert_at_last(user[0], user[1]); 
+                        users.append(user[0], user[1]); 
                     }
                 }
                 br.close();
                 JOptionPane.showMessageDialog(null, "Lectura exitosa!");
             }
          
-        }catch(Exception err){
+        }catch(IOException err){
             JOptionPane.showMessageDialog(null, "Error al leer el archivo de usuarios.");
         }
         return users;
                 
     }
-
-    public int CrearID(Grafo Usuarios){
-        Lista UL = Usuarios.getusuarios();
-        Lista TId = new Lista();
-        int num = (int) (Math.random()*999+1);
+    
+    
+    //JFile Chooser clase Ventana
+    //Revisar si es`public o private...
+    //ABRIR ARCHIVOS -->
+    //private String openfile(){
+    //    String aux= "";
+    //    String text = "";
+    //    try{
+    //        JFileChooser file=new JFileChooser();
+    //        file.showOpenDialog(this);
+    //        File open= file.getSelectedFile();
+    //        if (open!=null){
+    //            FileReader files = new FileReader(open);
+    //            BufferedReader read= new BufferedReader(files);
+    //            while((aux = read.readLine()) != null){
+    //                text += aux + "\n";
+    //                read.close();
+                    
+    //            }
+    //        }
+    //    }catch(IOException err){
+    //        JOptionPane.showMessageDialog(null, err + "\n No se ha encontrado el archivo", "Advertencia!!", JOptionPane.WARNING_MESSAGE);
+            
+    //    }
+    //    return text ; //el texto se guarda en el JTextArea usando setText(text(
+    //}
+    //GUARDAR ARCHIVOS -->
+    //private String savefile(){
+    //    try{
+    //       String name = "";
+    //        JFileChooser file = new JFileChooser();
+    //        file.showSaveDialog(this);
+    //        File save = file.getSelectedFile();
+    //        if (save != null){
+    //            FileWriter save = new FileWriter(save +".txt");
+    //            save.write(areaDeTexto.getText());
+    //            save.close();
+    //           JOptionPane.showMessageDialog(null,"El archivo se guardó exitosament", "Información:", JOptionPane.INFORMATION_MESSAGE);
+    //        }
+    //    }catch(IOException err){
+    //        JOptionPane.showMessageDialog(null, err + "\n No se ha guardado el archivo", "Advertencia!!", JOptionPane.WARNING_MESSAGE);
         
-        for(int x = 0; x < UL.len(); x++){
-            NodoPersona Persona = (NodoPersona) UL.get(x);
-            TId.append(Persona.getid());         
-        }
-        
-        while(TId.exist(num)){
-            num = (int) (Math.random()*999+1);
-        }
-        
-        return num;
-    }
-
-}
+    //    }
+    //}
+    
+    
