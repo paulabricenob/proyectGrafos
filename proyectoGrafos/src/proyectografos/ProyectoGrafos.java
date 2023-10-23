@@ -4,6 +4,7 @@
  */
 package proyectografos;
 
+import GUI.Ventana1;
 import Objetos.Funciones;
 import Objetos.NodoPersona;
 import TDatos.Lista;
@@ -31,6 +32,10 @@ public class ProyectoGrafos {
         
         Lista<NodoPersona> users2 = func.read_txt();
         users2.show_elements();
+        
+        //instanciamos la ventana
+        Ventana1 ventana = new Ventana1();
+        ventana.setVisible(true);
     }
     
 }
