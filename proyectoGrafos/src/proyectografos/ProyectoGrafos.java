@@ -4,9 +4,14 @@
  */
 package proyectografos;
 
+import GUI.Ventana1;
+import Objetos.Funciones;
+import Objetos.NodoPersona;
+import TDatos.Lista;
+
 /**
  *
- * @author diego
+ * @author paula
  */
 public class ProyectoGrafos {
 
@@ -17,16 +22,20 @@ public class ProyectoGrafos {
         // TODO code application logic here
         //Instanciamos las clases para usar el archivo txt
         Funciones func= new Funciones();
-        ListaPersonas users = new ListaPersonas();
+        Lista<NodoPersona> users = new Lista();
         //Prueba de insertar...
-        users.insert_at_last("Paula", "Vincenzo");
+       
         users.insert_at_last("Nicola", "Paula");
         users.insert_at_last("Vincenzo", "Nicola");
         //escribimos en el txt lo que insertamos
         func.write_txt(users);
         
-        ListaPersonas users2 = func.read_txt();
+        Lista<NodoPersona> users2 = func.read_txt();
         users2.show_elements();
+        
+        //instanciamos la ventana
+        Ventana1 ventana = new Ventana1();
+        ventana.setVisible(true);
     }
     
 }

@@ -159,7 +159,7 @@ public class Grafo {
         }
     }
     
-public void EliminarPorNombre(String name){ 
+public void EliminarPorNombre(String name ){ 
         NodoPersona Persona = null;
         for(int x = 0; x < Usuarios.len(); x++){          
             if(Usuarios.get(x).getName().equals(name)){
