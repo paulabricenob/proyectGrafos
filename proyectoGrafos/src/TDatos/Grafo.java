@@ -78,8 +78,8 @@ public class Grafo {
 			Nodo actual = Graph[i];
 			
 			while(actual != null){
-				System.out.printf("%d -> ", i);
-				System.out.printf("%d(%d)\n", actual.getData());
+				System.out.printf("d -> ", i);
+				System.out.printf("d(%d)\n", actual.getData());
 				
 				actual = actual.getNext();
 			}
