@@ -85,21 +85,6 @@ public class Funciones {
                 
     }
 
-    public int CrearID(Grafo Usuarios){
-        Lista UL = Usuarios.getusuarios();
-        Lista TId = new Lista();
-        int num = (int) (Math.random()*999+1);
-        
-        for(int x = 0; x < UL.len(); x++){
-            NodoPersona Persona = (NodoPersona) UL.get(x);
-            TId.append(Persona.getid());         
-        }
-        
-        while(TId.exist(num)){
-            num = (int) (Math.random()*999+1);
-        }
-        
-        return num;
-    }
+
 
 }

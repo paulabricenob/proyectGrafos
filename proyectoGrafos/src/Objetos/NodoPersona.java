@@ -12,24 +12,19 @@ import TDatos.Lista;
  */
 public class NodoPersona {
     private String name;
-    private int id;
     private NodoPersona pnext;
     private Lista<Arco> conocidos;
     
-    public NodoPersona(String name, Lista conocidos, int id){
+    public NodoPersona(String name, Lista conocidos){
         this.name = name;
         this.pnext = null;
         this.conocidos = conocidos;
-        this.id = id;
     }
     
     public String getName() {
         return name;
     }
-    
-    public int getid() {
-        return id;
-    }
+
 
     public void setName(String name) {
         this.name = name;
