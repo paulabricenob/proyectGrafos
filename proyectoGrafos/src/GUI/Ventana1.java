@@ -31,6 +31,7 @@ public class Ventana1 extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
         Exit = new javax.swing.JButton();
+        loadFile = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,6 +51,9 @@ public class Ventana1 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 40, 20));
+
+        loadFile.setText("CARGAR ARCHIVO");
+        jPanel1.add(loadFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/50ae60944d2c7e3478c2c063b7037ffc.jpg"))); // NOI18N
         background.setText("X");
@@ -103,6 +107,7 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JButton Exit;
     private javax.swing.JLabel background;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton loadFile;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
