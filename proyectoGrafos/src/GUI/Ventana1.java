@@ -32,6 +32,7 @@ public class Ventana1 extends javax.swing.JFrame {
         title = new javax.swing.JLabel();
         Exit = new javax.swing.JButton();
         loadFile = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,8 +53,17 @@ public class Ventana1 extends javax.swing.JFrame {
         });
         jPanel1.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 40, 20));
 
-        loadFile.setText("CARGAR ARCHIVO");
-        jPanel1.add(loadFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+        loadFile.setFont(new java.awt.Font("Artifakt Element Book", 0, 12)); // NOI18N
+        loadFile.setText("DESCARGAR ARCHIVO");
+        jPanel1.add(loadFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+
+        jButton1.setText("CARGAR PROCEDIMIENTO PREVIO");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/50ae60944d2c7e3478c2c063b7037ffc.jpg"))); // NOI18N
         background.setText("X");
@@ -67,6 +77,10 @@ public class Ventana1 extends javax.swing.JFrame {
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         this.dispose();
     }//GEN-LAST:event_ExitActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -106,6 +120,7 @@ public class Ventana1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Exit;
     private javax.swing.JLabel background;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loadFile;
     private javax.swing.JLabel title;
