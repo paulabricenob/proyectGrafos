@@ -23,7 +23,6 @@ public class Grafo {
     public void setususarios(Lista Usuarios) {
         this.Usuarios = Usuarios;
     }
-    
     public boolean isEmpty(){
         return Usuarios == null;
     }
@@ -37,7 +36,7 @@ public class Grafo {
         return -1;
     }    
 
-    public int EncontrarPosisionNombre(String name){
+    public int UbicacionUsuario(String name){
         for(int x = 0; x < Usuarios.len(); x++){
             if(Usuarios.get(x).getName().equals(name)){
                 return x;
@@ -45,27 +44,8 @@ public class Grafo {
         }
         return -1;
     }
-    
-    public int EncontrarPosisionID(int Vnum){
-        for(int x = 0; x < Usuarios.len(); x++){
-            if(Usuarios.get(x).getid() == Vnum){
-                return x;
-            }
-        }
-        return -1;
-    }
-    
-    public NodoPersona EncontrarPersonaID(int Vnum){
-        for(int x = 0; x < Usuarios.len(); x++){
-            NodoPersona person = Usuarios.get(x);
-            if(person.getid() == Vnum){
-                return person;
-            }
-        }
-        return null;
-    }
 
-    public NodoPersona EncontrarPersonaNombre(String name){
+    public NodoPersona EncontrarPersona(String name){
         for(int x = 0; x < Usuarios.len(); x++){
             NodoPersona person = Usuarios.get(x);
             if(person.getName().equals(name)){
@@ -75,9 +55,9 @@ public class Grafo {
         return null;
     }
     
-    public boolean addusuario(int id, String name){
+    public boolean addusuario(String name){
         this.conocidos = new Lista();
-        NodoPersona person = new NodoPersona(name, conocidos, id);       
+        NodoPersona person = new NodoPersona(name, conocidos);       
         boolean run = true;
         if(Usuarios.isEmpty()){
             Usuarios.append(person);
@@ -85,9 +65,6 @@ public class Grafo {
         else{
             for(int x = 0; x < Usuarios.len(); x++){
                 NodoPersona pAux = (NodoPersona) Usuarios.get(x);
-                if(pAux.getid() == id){
-                    run = false;
-                }
                 if(pAux.getName().equals(name)){
                     run = false;
                 }
@@ -102,7 +79,7 @@ public class Grafo {
         return run;
     }
 
-    public void AgregarArco(int start, int end){
+    public void AgregarArco(String start, String end){
         try{
             
             NodoPersona personStart = Usuarios.get(UbicacionUsuario(start));
@@ -121,14 +98,14 @@ public class Grafo {
                     int position = x;
                     NodoPersona pAux = (NodoPersona) Usuarios.get(x);
 
-                    if(pAux.getid() == start){
+                    if(pAux.getName().equals(start)){
                         Arco arco = new Arco(start, end);
                         Lista conocidos = pAux.getconocidos();
                         conocidos.append(arco);
                         pAux.setconocidos(conocidos);
                         Usuarios.replace(position, pAux);                             
                     }
-                    if(pAux.getid() == end){
+                    if(pAux.getName().equals(end)){
                         Arco arco = new Arco(start, end);
                         Lista conocidos = pAux.getconocidos();
                         conocidos.append(arco);
@@ -144,26 +121,26 @@ public class Grafo {
     }
 
 
-    public void EliminarArco(int personA, int personB, int option){
+    public void EliminarArco(String personA, String personB, int option){
         try{
-            NodoPersona pA = EncontrarPersonaID(personA);
-            NodoPersona pB = EncontrarPersonaID(personB);
+            NodoPersona pA = EncontrarPersona(personA);
+            NodoPersona pB = EncontrarPersona(personB);
             
 
             Lista conocidosA = pA.getconocidos();
             for (int x = 0; x < conocidosA.len(); x++) {
                 Arco e = (Arco) conocidosA.get(x);
-                if(e.getStart() == personA && e.getEnd() == personB){
+                if(e.getStart().equals(personA) && e.getEnd().equals(personB)){
                     conocidosA.pop(x);
                     pA.setconocidos(conocidosA);
-                    int position = EncontrarPosisionID(pA.getid());
+                    int position = UbicacionUsuario(pA.getName());
                     Usuarios.replace(position, pA);
                 }
                 
-                if(e.getEnd() == personA && e.getStart() == personB){
+                if(e.getEnd().equals(personA) && e.getStart().equals(personB)){
                     conocidosA.pop(x);
                     pA.setconocidos(conocidosA);
-                    int position = EncontrarPosisionID(pA.getid());
+                    int position = UbicacionUsuario(pA.getName());
                     Usuarios.replace(position, pA);
                 }
                 
@@ -172,17 +149,17 @@ public class Grafo {
             Lista conocidosB = pB.getconocidos();
             for (int x = 0; x < conocidosB.len(); x++) {
                 Arco e = (Arco) conocidosB.get(x);
-                if(e.getStart() == personA && e.getEnd() == personB){
+                if(e.getStart().equals(personA) && e.getEnd().equals(personB)){
                     conocidosB.pop(x);
                     pB.setconocidos(conocidosB);
-                    int position = EncontrarPosisionID(pB.getid());
+                    int position = UbicacionUsuario(pB.getName());
                     Usuarios.replace(position, pB);
                 }
                
-                if(e.getEnd() == personA && e.getStart() == personB){
+                if(e.getEnd().equals(personA) && e.getStart().equals(personB)){
                     conocidosB.pop(x);
                     pB.setconocidos(conocidosB);
-                    int position = EncontrarPosisionID(pB.getid());
+                    int position = UbicacionUsuario(pB.getName());
                     Usuarios.replace(position, pB);
                 }
                 
@@ -211,7 +188,7 @@ public void EliminarPorNombre(String name){
                 Lista conocidos = pAux.getconocidos();
                 for(int y = 0; y < conocidos.len(); y++){
                     Arco Arco = (Arco) conocidos.get(y);
-                    if(Arco.getStart() == Persona.getid() || Arco.getEnd() == Persona.getid()){
+                    if(Arco.getStart().equals(Persona.getName()) || Arco.getEnd().equals(Persona.getName())){
                         conocidos.pop(y);
                         pAux.setconocidos(conocidos);
                         Usuarios.replace(x, pAux);
@@ -220,53 +197,4 @@ public void EliminarPorNombre(String name){
             }
         }       
     }
-    
-
-    public void EliminarPorID(int num){ 
-        NodoPersona Persona = null;
-        for(int x = 0; x < Usuarios.len(); x++){
-            NodoPersona p = Usuarios.get(x);
-            if(p.getid() == num){
-                Persona = Usuarios.get(x);
-                Usuarios.pop(x);
-            }            
-        }
-        
-        if(Persona == null){
-            JOptionPane.showMessageDialog(null, "Error: persona no encontrada en el grafo");
-        }
-        else{
-            for (int x = 0; x < Usuarios.len(); x++) {
-                NodoPersona pAux = Usuarios.get(x);
-                Lista conocidos = pAux.getconocidos();
-                for(int y = 0; y < conocidos.len(); y++){
-                    Arco Arco = (Arco) conocidos.get(y);
-                    if(Arco.getStart() == Persona.getid() || Arco.getEnd() == Persona.getid()){
-                        conocidos.pop(y);
-                        pAux.setconocidos(conocidos);
-                        Usuarios.replace(x, pAux);
-                    }
-                }
-            }       
-        }       
-    }
-    
-    
-    
-   
-
-    
-//   public void showGraph(){
-//		for(int i = 0; i < Graph.length; i++){
-//			Nodo actual = Graph[i];
-//			
-//			while(actual != null){
-//				System.out.printf("%d -> ", i);
-//				System.out.printf("%d(%d)\n", actual.getData());
-//				
-//				actual = actual.getNext();
-//			}
-//			System.out.println(Graph);
-//		}
-//	}
 }
