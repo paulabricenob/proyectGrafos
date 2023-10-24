@@ -28,42 +28,51 @@ public class Ventana1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
-        Exit = new javax.swing.JButton();
+        exit = new javax.swing.JButton();
         loadFile = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        loadPrevioustxt = new javax.swing.JButton();
         background = new javax.swing.JLabel();
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("--------------------------------------------");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        title.setFont(new java.awt.Font("Artifakt Element Heavy", 0, 48)); // NOI18N
+        title.setFont(new java.awt.Font("Artifakt Element Heavy", 0, 60)); // NOI18N
         title.setText("TU RED SOCIAL");
-        jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
+        jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
 
-        Exit.setForeground(new java.awt.Color(255, 0, 0));
-        Exit.setText("X");
-        Exit.addActionListener(new java.awt.event.ActionListener() {
+        exit.setForeground(new java.awt.Color(255, 0, 0));
+        exit.setText("X");
+        exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitActionPerformed(evt);
+                exitActionPerformed(evt);
             }
         });
-        jPanel1.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 40, 20));
+        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 40, 20));
 
         loadFile.setFont(new java.awt.Font("Artifakt Element Book", 0, 12)); // NOI18N
         loadFile.setText("DESCARGAR ARCHIVO");
-        jPanel1.add(loadFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
-
-        jButton1.setText("CARGAR PROCEDIMIENTO PREVIO");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loadFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loadFileActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, -1));
+        jPanel1.add(loadFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
+
+        loadPrevioustxt.setText("CARGAR PROCEDIMIENTO PREVIO");
+        loadPrevioustxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadPrevioustxtActionPerformed(evt);
+            }
+        });
+        jPanel1.add(loadPrevioustxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, -1, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/50ae60944d2c7e3478c2c063b7037ffc.jpg"))); // NOI18N
         background.setText("X");
@@ -74,13 +83,19 @@ public class Ventana1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         this.dispose();
-    }//GEN-LAST:event_ExitActionPerformed
+    }//GEN-LAST:event_exitActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void loadPrevioustxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadPrevioustxtActionPerformed
+        //AGREGAR txt 
+        // mostrar un error si el txt está vacío 
+        Ventana3 v3 = new Ventana3(this);
+    }//GEN-LAST:event_loadPrevioustxtActionPerformed
+
+    private void loadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFileActionPerformed
+        Ventana2 v2 = new Ventana2(this);
+    }//GEN-LAST:event_loadFileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,11 +133,12 @@ public class Ventana1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Exit;
     private javax.swing.JLabel background;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton exit;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loadFile;
+    private javax.swing.JButton loadPrevioustxt;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

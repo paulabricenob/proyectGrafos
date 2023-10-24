@@ -233,6 +233,7 @@ public class Lista<T> {
         }
         return false;
     }
+    
 
     public void insert_at_beginning(String name, Lista conocidos){
         NodoPersona new_users = new NodoPersona(name, conocidos);
@@ -277,8 +278,7 @@ public class Lista<T> {
             }
         }
     }
+    
+
 } 
-        
-
-
     

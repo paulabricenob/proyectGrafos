@@ -4,7 +4,16 @@
  */
 package GUI;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -12,12 +21,18 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author diego
  */
 public class Ventana2 extends javax.swing.JFrame {
+    
+    public static Ventana1 v1;
 
     /**
      * Creates new form Ventana2
      */
-    public Ventana2() {
+    public Ventana2(Ventana1 v1) {
         initComponents();
+        this.v1 = v1;
+        v1.setVisible(false);
+        this.setVisible(true);
+        this.setLocationRelativeTo(null); //muestra la interfáz en el centro
     }
 
     /**
@@ -31,19 +46,79 @@ public class Ventana2 extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         openFile = new javax.swing.JButton();
+        saveTxt = new javax.swing.JButton();
+        route = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        content = new javax.swing.JTextArea();
+        exit = new javax.swing.JButton();
+        nextVentana = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        openFile.setBackground(new java.awt.Color(204, 204, 204));
         openFile.setText("Abrir Archivo");
         openFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openFileActionPerformed(evt);
             }
         });
-        jPanel1.add(openFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, -1));
+        jPanel1.add(openFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, 30));
+
+        saveTxt.setBackground(new java.awt.Color(204, 204, 204));
+        saveTxt.setText("Guardar ");
+        saveTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveTxtActionPerformed(evt);
+            }
+        });
+        jPanel1.add(saveTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 110, 30));
+
+        route.setEditable(false);
+        route.setBackground(new java.awt.Color(204, 204, 204));
+        route.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                routeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(route, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 310, 30));
+
+        content.setEditable(false);
+        content.setBackground(new java.awt.Color(255, 204, 153));
+        content.setColumns(20);
+        content.setRows(5);
+        jScrollPane1.setViewportView(content);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 370, 220));
+
+        exit.setForeground(new java.awt.Color(255, 0, 0));
+        exit.setText("X");
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
+        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 40, 20));
+
+        nextVentana.setBackground(new java.awt.Color(204, 255, 204));
+        nextVentana.setText("Siguiente -->");
+        nextVentana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextVentanaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(nextVentana, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, -1, -1));
+
+        jLabel2.setText("Descarga el archivo .txt que deseas usar! Para avanzar, presiona siguiente.");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 390, 70));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fileimagen.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -70, 650, 580));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 450));
 
@@ -53,9 +128,77 @@ public class Ventana2 extends javax.swing.JFrame {
     private void openFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileActionPerformed
         JFileChooser file = new JFileChooser();
         file.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        FileNameExtensionFilter;
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de texto", "txt");
+        file.setFileFilter(filter); //devuelve un valor entero dependiendo si se elige el boton de abrir o cancelar
+        
+        int ans = file.showOpenDialog(this);
+        if (ans != JFileChooser.CANCEL_OPTION){
+            File file_name = file.getSelectedFile();
+            if(file_name.getName().equals("")){
+               
+                JOptionPane.showMessageDialog(this, "Error al abrir el archivo, revise que esté seleccionado el archivo");
+            }else{
+                    route.setText(file_name.getAbsolutePath());
+                try {
+                    showContent(file_name.getAbsolutePath());
+                } catch (IOException ex) {
+                    java.util.logging.Logger.getLogger(Ventana2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+                }
+        }
+       
     }//GEN-LAST:event_openFileActionPerformed
+    public void showContent(String file_name) throws IOException{
+        String line;
+        try {
+            FileReader f = new FileReader(file_name);
+            BufferedReader b = new BufferedReader(f);
+            do{
+                line = b.readLine();
+                content.setText(content.getText()+ line + "\n");
+            }while(line != null);
+        } catch (FileNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Ventana2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
+    
+    private String savefile(){
+        String name="";
+        try{
+           JFileChooser file = new JFileChooser();
+            file.showSaveDialog(this);
+            File save = file.getSelectedFile();
+            if (save != null){
+                FileWriter sav = new FileWriter(sav +".txt");
+                sav.write(content.getText());
+                sav.close();
+                JOptionPane.showMessageDialog(null,"El archivo se guardó exitosament", "Información:", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }catch(IOException err){
+            JOptionPane.showMessageDialog(null, err + "\n No se ha guardado el archivo", "Advertencia!!", JOptionPane.WARNING_MESSAGE);
+        
+        }
+    }
+    
+    private void saveTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTxtActionPerformed
+       
+        
+    }//GEN-LAST:event_saveTxtActionPerformed
 
+    private void routeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeActionPerformed
+        this.savefile();
+    }//GEN-LAST:event_routeActionPerformed
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_exitActionPerformed
+
+    private void nextVentanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextVentanaActionPerformed
+        // mostrar un error si NO SE HA GUARDADO EN MEMORIA 
+        Ventana3 v3 = new Ventana3(this);
+    }//GEN-LAST:event_nextVentanaActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -86,13 +229,21 @@ public class Ventana2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ventana2().setVisible(true);
+                new Ventana2(v1).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea content;
+    private javax.swing.JButton exit;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton nextVentana;
     private javax.swing.JButton openFile;
+    private javax.swing.JTextField route;
+    private javax.swing.JButton saveTxt;
     // End of variables declaration//GEN-END:variables
 }

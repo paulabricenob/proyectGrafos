@@ -93,8 +93,6 @@ public class Funciones {
         return users;
                 
     }
-}    
-    
     //JFile Chooser clase Ventana
     //Revisar si es`public o private...
     //ABRIR ARCHIVOS -->
@@ -138,5 +136,8 @@ public class Funciones {
         
     //    }
     //}
-    
-    
+   
+
+
+
+}

@@ -44,6 +44,26 @@ public class Grafo {
         return null;
     }
     
+    public boolean edgeExist(String start, String end, NodoPersona person){
+        Lista conocidos = person.getconocidos();
+        if(conocidos.isEmpty() == true){
+            return false;
+        }
+        else{
+            for(int x = 0; x < conocidos.len(); x++){
+                Arco Arco = (Arco) conocidos.get(x);
+                if(Arco.getStart() == start && Arco.getEnd() == end){
+                    return true;
+                }
+                else if(Arco.getStart() == end && Arco.getEnd() == start){
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+    
+    
     public boolean addusuario(String name){
         this.conocidos = new Lista();
         NodoPersona person = new NodoPersona(name, conocidos);       
@@ -82,6 +102,10 @@ public class Grafo {
                 JOptionPane.showMessageDialog(null, "Error: no hay vertices");
             }
             
+            else if(edgeExist(start, end, personStart) || edgeExist(start, end, personEnd)){
+                JOptionPane.showMessageDialog(null, "Error: relacion ya establecida con anterioridad");
+            }  
+            
             else{
                 for(int x = 0; x < Usuarios.len(); x++){
                     int position = x;
@@ -112,9 +136,13 @@ public class Grafo {
 
     public void EliminarArco(String personA, String personB, int option){
         try{
+            
             NodoPersona pA = EncontrarPersona(personA);
             NodoPersona pB = EncontrarPersona(personB);
             
+            if(!edgeExist(personA, personB, pA) && !edgeExist(personA, personB, pB) && option == 0){
+                JOptionPane.showMessageDialog(null, "Error: no existe relacion entre ambas personas");
+            }
 
             Lista conocidosA = pA.getconocidos();
             for (int x = 0; x < conocidosA.len(); x++) {
@@ -159,7 +187,7 @@ public class Grafo {
         }
     }
     
-public void EliminarPorNombre(String name ){ 
+    public void EliminarPorNombre(String name ){ 
         NodoPersona Persona = null;
         for(int x = 0; x < Usuarios.len(); x++){          
             if(Usuarios.get(x).getName().equals(name)){
@@ -185,5 +213,36 @@ public void EliminarPorNombre(String name ){
                 }
             }
         }       
+    }
+
+    public void ImprecionPR(){
+        for(int x = 0; x < Usuarios.len(); x++){
+            NodoPersona vertice = Usuarios.get(x);
+            System.out.print("El usuario " + vertice.getName()+" esta conectado con ");
+            if(vertice.getconocidos().len() == 0){
+                System.out.println(" nadie");
+            }
+            else if(vertice.getconocidos().len() > 1){
+                for(int y = 0; y < vertice.getconocidos().len(); y++){
+                    Arco arista = (Arco) vertice.getconocidos().get(y);
+                    String name = arista.getEnd();
+                    if(y == vertice.getconocidos().len()-1){
+                        System.out.println(" y " + name);    
+                    }
+                    else if(y == vertice.getconocidos().len()-2){
+                        System.out.print(name);
+                    }
+                    else{
+                        System.out.print(name + ", ");
+                    }
+                }    
+            }
+            else{
+                for(int y = 0; y < vertice.getconocidos().len(); y++){
+                    Arco arista = (Arco) vertice.getconocidos().get(y);
+                    System.out.println(arista.getEnd());
+                }
+            }
+        }
     }
 }
