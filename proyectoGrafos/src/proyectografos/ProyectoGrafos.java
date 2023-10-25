@@ -31,6 +31,7 @@ public class ProyectoGrafos {
     }
     
     
+    
     /* a partir de aqui es lo del visualizador
     public static void main(String[] args) {
         System.setProperty("org.graphstream.ui", "swing");
