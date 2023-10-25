@@ -16,10 +16,22 @@ import TDatos.Lista;
  * @author paula
  */
 public class ProyectoGrafos {
+    
+    
+    
+    public static void main(String[] args) {
+        String text = "usuarios\n@pepe\n@mazinger\nrelaciones\n@pepe, @mazinger\n@mazinger, @juanc\n..."; 
 
-    /**
-     * @param args the command line arguments
-     */
+        String[] parts = text.split("relaciones");
+        String users = parts[0].replace("usuarios", "").trim();
+        String relationships = parts[1].trim();
+
+        System.out.println("Users:\n" + users);
+        System.out.println("Relationships:\n" + relationships);
+    }
+    
+    
+    /* a partir de aqui es lo del visualizador
     public static void main(String[] args) {
         System.setProperty("org.graphstream.ui", "swing");
 		
@@ -33,6 +45,6 @@ public class ProyectoGrafos {
 		graph.addEdge("CA", "C", "A");
 
 		graph.display();
-    }
+    }*/
     
 }
