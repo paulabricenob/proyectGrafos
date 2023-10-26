@@ -70,9 +70,14 @@ public class Funciones {
                 }
                 if(!"".equals(usuarios_txt)){
                     String[] users_split = usuarios_txt.split("relaciones");
-                    String users = users_split[0];
+                    String users = users_split[0].replace("usuarios", "").trim();
                     graph.addusuario(users);
-                    String relationships = users_split[1]; 
+                    // aqui tamb va el visualizador del usuario
+                    
+                    String relationships = users_split[1].trim(); 
+                    
+                    
+                    // aqui tambien hay que comprobar si hay relaciones
                     for (int i=0; i < relationships.length(); i++){
                         String[] arco = relationships.split(",");
                         graph.AgregarArco(arco[0], arco[1]);
