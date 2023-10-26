@@ -4,11 +4,18 @@
  */
 package GUI;
 
+import TDatos.Grafo;
+
 /**
  *
  * @author diego
  */
 public class Ventana1 extends javax.swing.JFrame {
+    Grafo grafo ;
+    public static Ventana2 v2;
+    public static Ventana3 v3;
+    
+    
 
     /**
      * Creates new form Ventana1
@@ -16,7 +23,8 @@ public class Ventana1 extends javax.swing.JFrame {
     public Ventana1() {
         initComponents();
         this.setVisible(true);
-        this.setLocationRelativeTo(null); //muestra la interfáz en el centro
+        this.setLocationRelativeTo(null);//muestra la interfáz en el centro
+      
     }
 
     /**
@@ -33,7 +41,12 @@ public class Ventana1 extends javax.swing.JFrame {
         title = new javax.swing.JLabel();
         exit = new javax.swing.JButton();
         loadFile = new javax.swing.JButton();
-        loadPrevioustxt = new javax.swing.JButton();
+        addUser = new javax.swing.JButton();
+        design1 = new javax.swing.JLabel();
+        deleteUser = new javax.swing.JButton();
+        design2 = new javax.swing.JLabel();
+        showGraph = new javax.swing.JButton();
+        updateRepository = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -45,8 +58,9 @@ public class Ventana1 extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         title.setFont(new java.awt.Font("Artifakt Element Heavy", 0, 60)); // NOI18N
+        title.setForeground(new java.awt.Color(204, 0, 51));
         title.setText("TU RED SOCIAL");
-        jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
+        jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
 
         exit.setForeground(new java.awt.Color(255, 0, 0));
         exit.setText("X");
@@ -55,47 +69,78 @@ public class Ventana1 extends javax.swing.JFrame {
                 exitActionPerformed(evt);
             }
         });
-        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 40, 20));
+        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, 40, 20));
 
-        loadFile.setFont(new java.awt.Font("Artifakt Element Book", 0, 12)); // NOI18N
+        loadFile.setFont(new java.awt.Font("Artifakt Element Book", 1, 14)); // NOI18N
         loadFile.setText("DESCARGAR ARCHIVO");
         loadFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadFileActionPerformed(evt);
             }
         });
-        jPanel1.add(loadFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
+        jPanel1.add(loadFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, -1, -1));
 
-        loadPrevioustxt.setText("CARGAR PROCEDIMIENTO PREVIO");
-        loadPrevioustxt.addActionListener(new java.awt.event.ActionListener() {
+        addUser.setFont(new java.awt.Font("Artifakt Element Book", 1, 14)); // NOI18N
+        addUser.setText("AÑADIR USUARIO");
+        addUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadPrevioustxtActionPerformed(evt);
+                addUserActionPerformed(evt);
             }
         });
-        jPanel1.add(loadPrevioustxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, -1, -1));
+        jPanel1.add(addUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/50ae60944d2c7e3478c2c063b7037ffc.jpg"))); // NOI18N
+        design1.setFont(new java.awt.Font("Artifakt Element Black", 1, 100)); // NOI18N
+        design1.setForeground(new java.awt.Color(0, 255, 51));
+        design1.setText("+");
+        jPanel1.add(design1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
+
+        deleteUser.setFont(new java.awt.Font("Artifakt Element Book", 1, 14)); // NOI18N
+        deleteUser.setText("ELIMINAR USUARIO");
+        deleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteUserActionPerformed(evt);
+            }
+        });
+        jPanel1.add(deleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, -1, -1));
+
+        design2.setFont(new java.awt.Font("Artifakt Element Heavy", 1, 100)); // NOI18N
+        design2.setForeground(new java.awt.Color(255, 0, 0));
+        design2.setText("-");
+        jPanel1.add(design2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, -1));
+
+        showGraph.setFont(new java.awt.Font("Artifakt Element Book", 1, 14)); // NOI18N
+        showGraph.setText("MOSTRAR RED SOCIAL");
+        jPanel1.add(showGraph, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+
+        updateRepository.setFont(new java.awt.Font("Artifakt Element Book", 1, 14)); // NOI18N
+        updateRepository.setText("ACTUALIZAR REPOSITORIO");
+        jPanel1.add(updateRepository, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, -1, -1));
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/descarga.jpeg"))); // NOI18N
         background.setText("X");
-        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 440));
+        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 690, 500));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 440));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        this.dispose();
+        //SALIR POR COMPLETO DEL PROGRAMA -->
+        System.exit(0);
     }//GEN-LAST:event_exitActionPerformed
-
-    private void loadPrevioustxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadPrevioustxtActionPerformed
-        //AGREGAR txt 
-        // mostrar un error si el txt está vacío 
-        Ventana3 v3 = new Ventana3(this);
-    }//GEN-LAST:event_loadPrevioustxtActionPerformed
 
     private void loadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFileActionPerformed
         Ventana2 v2 = new Ventana2(this);
     }//GEN-LAST:event_loadFileActionPerformed
+
+    private void addUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserActionPerformed
+        Ventana3 v3 = new Ventana3(this);
+    }//GEN-LAST:event_addUserActionPerformed
+
+    private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed
+        Ventana4 v4 = new Ventana4(this);
+    }//GEN-LAST:event_deleteUserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,12 +178,17 @@ public class Ventana1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addUser;
     private javax.swing.JLabel background;
+    private javax.swing.JButton deleteUser;
+    private javax.swing.JLabel design1;
+    private javax.swing.JLabel design2;
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loadFile;
-    private javax.swing.JButton loadPrevioustxt;
+    private javax.swing.JButton showGraph;
     private javax.swing.JLabel title;
+    private javax.swing.JButton updateRepository;
     // End of variables declaration//GEN-END:variables
 }

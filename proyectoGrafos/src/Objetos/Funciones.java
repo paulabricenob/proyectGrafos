@@ -5,17 +5,14 @@
 package Objetos;
 
 
+import Objetos.Persona;
 import TDatos.Grafo;
-import Objetos.NodoPersona;
 import TDatos.Lista;
 import TDatos.Nodo;
-import proyectografos.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-//import java.io.FileWriter;
 import java.io.PrintWriter;
-//import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java.io.IOException;
 
@@ -25,27 +22,22 @@ import java.io.IOException;
  */
 public class Funciones {
     //escribir en el txt
-    public void write_txt(Lista Usuarios){
+    public void write_txt(Grafo usuarios){
         String current_users = "";
-        if (!Usuarios.isEmpty()){
-            for (int x=0; x <Usuarios.getSize(); x++){
-                NodoPersona persona = (NodoPersona) Usuarios.get(x); 
-                current_users += persona.getName()+"\n";
+        if (!usuarios.getusuarios().isEmpty()){
+            Nodo<Persona> temp = usuarios.getusuarios().getHead();
+            for (int i=0; i < usuarios.getusuarios().len(); i++){
+                current_users += temp.getData().getName()+ "," + temp.getData().getconocidos() + "\n";
+                temp = temp.getNext();
             }
-            for (int x=0; x <Usuarios.getSize(); x++){
-                NodoPersona persona = (NodoPersona) Usuarios.get(x); 
-                current_users += persona.getName() + "," + persona.getconocidos() + "\n";
-            }      
         }
+        
         try{
            PrintWriter pw= new PrintWriter("test\\usuarios.txt");
            //pw.print -- borra la info actual
            pw.print(current_users); 
            //pw.append -- agrega info
-           pw.append("Paula, Vincenzo");
-           pw.append("\n");
-           pw.append("Nicola, Paula");
-           pw.close();
+           //pw.append("");
            // revisar si podemos usar JOption Pane
            JOptionPane.showMessageDialog(null, "Guardado exitoso");
                      
@@ -57,8 +49,8 @@ public class Funciones {
     }
     
     //leer el txt
-    public Lista read_txt(){
-        Lista users = new Lista();
+    public Grafo read_txt(){
+        Grafo graph = new Grafo();
         String line;
         String usuarios_txt = "";
         String path = "test\\usuarios.txt";
@@ -77,47 +69,46 @@ public class Funciones {
                     
                 }
                 if(!"".equals(usuarios_txt)){
-                    String[] users_split = usuarios_txt.split("\n");
-                    for (int i=0; i < users_split.length; i++){
-                        String [] user = users_split[i].split(",");
-                        users.append(user[0], user[1]); 
+                    String[] users_split = usuarios_txt.split("relaciones");
+                    String users = users_split[0];
+                    graph.addusuario(users);
+                    String relationships = users_split[1]; 
+                    for (int i=0; i < relationships.length(); i++){
+                        String[] arco = relationships.split(",");
+                        graph.AgregarArco(arco[0], arco[1]);
                     }
                 }
                 br.close();
                 JOptionPane.showMessageDialog(null, "Lectura exitosa!");
             }
          
-        }catch(IOException err){
+        }catch(Exception err){
             JOptionPane.showMessageDialog(null, "Error al leer el archivo de usuarios.");
         }
-        return users;
+        return graph;
+        
                 
     }
+            // OPCION DE CODIGO
+              //  if(!"".equals(usuarios_txt)){
+                 //   while(usuarios_txt.equals("usuarios")){
+                    //    String[] users_split = usuarios_txt.split("\n");
+                      //  for (int i=0; i < users_split.length ; i++){
+                        //    users.addusuario(users_split[0]);
+                       // }
+                        
+                        
+                    //}
+                    //for (int i=0; i < users_split.length; i++){
+                    //    String [] user = users_split[i].split(",");
+                    //    users.addusuario(user[0], user[1]); 
+                    //}
+               // }
+                
+    
     //JFile Chooser clase Ventana
     //Revisar si es`public o private...
-    //ABRIR ARCHIVOS -->
-    //private String openfile(){
-    //    String aux= "";
-    //    String text = "";
-    //    try{
-    //        JFileChooser file=new JFileChooser();
-    //        file.showOpenDialog(this);
-    //        File open= file.getSelectedFile();
-    //        if (open!=null){
-    //            FileReader files = new FileReader(open);
-    //            BufferedReader read= new BufferedReader(files);
-    //            while((aux = read.readLine()) != null){
-    //                text += aux + "\n";
-    //                read.close();
-                    
-    //            }
-    //        }
-    //    }catch(IOException err){
-    //        JOptionPane.showMessageDialog(null, err + "\n No se ha encontrado el archivo", "Advertencia!!", JOptionPane.WARNING_MESSAGE);
-            
-    //    }
-    //    return text ; //el texto se guarda en el JTextArea usando setText(text(
-    //}
+
     //GUARDAR ARCHIVOS -->
     //private String savefile(){
     //    try{

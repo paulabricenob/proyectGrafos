@@ -10,16 +10,15 @@ import TDatos.Lista;
  *
  * @author diego
  */
-public class NodoPersona {
+public class Persona {
     private String name;
-    private NodoPersona pnext;
     private Lista<Arco> conocidos;
-    
-    public NodoPersona(String name, Lista conocidos){
+
+    public Persona(String name, Lista<Arco> conocidos) {
         this.name = name;
-        this.pnext = null;
         this.conocidos = conocidos;
     }
+    
     
     public String getName() {
         return name;
@@ -29,13 +28,7 @@ public class NodoPersona {
         this.name = name;
     }
 
-    public NodoPersona getPnext() {
-        return pnext;
-    }
-
-    public void setPnext(NodoPersona pnext) {
-        this.pnext = pnext;
-    }
+   
     public Lista getconocidos() {
         return conocidos;
     }

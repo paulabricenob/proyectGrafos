@@ -8,12 +8,12 @@ package GUI;
  *
  * @author diego
  */
-public class Ventana3 extends javax.swing.JFrame {
+public class Ventana4 extends javax.swing.JFrame {
     public static Ventana1 v1;
     /**
-     * Creates new form Ventana3
+     * Creates new form Ventana4
      */
-    public Ventana3(Ventana1 v1) {
+    public Ventana4(Ventana1 v1) {
         initComponents();
         this.v1 = v1;
         v1.setVisible(false);
@@ -31,14 +31,11 @@ public class Ventana3 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        title4 = new javax.swing.JLabel();
         LabelNombre = new javax.swing.JLabel();
         nameUser = new javax.swing.JTextField();
-        LabelConocidos = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        conocidosUser = new javax.swing.JTextArea();
-        title3 = new javax.swing.JLabel();
-        background3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         exit = new javax.swing.JButton();
         next = new javax.swing.JButton();
 
@@ -47,32 +44,22 @@ public class Ventana3 extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        title4.setFont(new java.awt.Font("Artifakt Element Heavy", 0, 36)); // NOI18N
+        title4.setForeground(new java.awt.Color(204, 0, 0));
+        title4.setText("ELIMINAR USUARIO");
+        jPanel1.add(title4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
+
         LabelNombre.setFont(new java.awt.Font("Artifakt Element Book", 1, 18)); // NOI18N
         LabelNombre.setText("Nombre del usuario:");
-        jPanel1.add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 190, 20));
-        jPanel1.add(nameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 330, 30));
+        jPanel1.add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 190, 20));
+        jPanel1.add(nameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 330, 30));
 
-        LabelConocidos.setFont(new java.awt.Font("Artifakt Element Book", 1, 18)); // NOI18N
-        LabelConocidos.setText("Relaciones del usuario:");
-        jPanel1.add(LabelConocidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 220, 20));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/usuario.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, -30, 520, 460));
 
-        conocidosUser.setColumns(20);
-        conocidosUser.setRows(5);
-        jScrollPane1.setViewportView(conocidosUser);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 330, -1));
-
-        title3.setFont(new java.awt.Font("Artifakt Element Heavy", 0, 36)); // NOI18N
-        title3.setForeground(new java.awt.Color(0, 153, 255));
-        title3.setText("AÑADIR USUARIO");
-        jPanel1.add(title3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, -1, -1));
-
-        background3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar-usuario.png"))); // NOI18N
-        background3.setText("jLabel4");
-        jPanel1.add(background3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-160, -30, 500, 470));
-
-        jLabel1.setText("@TUREDSOCIAL");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 410, -1, 10));
+        jLabel2.setText("@TUREDSOCIAL");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 410, -1, 10));
 
         exit.setForeground(new java.awt.Color(255, 0, 0));
         exit.setText("X");
@@ -81,7 +68,7 @@ public class Ventana3 extends javax.swing.JFrame {
                 exitActionPerformed(evt);
             }
         });
-        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 40, 20));
+        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 40, 20));
 
         next.setText("GUARDAR");
         next.addActionListener(new java.awt.event.ActionListener() {
@@ -89,9 +76,9 @@ public class Ventana3 extends javax.swing.JFrame {
                 nextActionPerformed(evt);
             }
         });
-        jPanel1.add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, -1, -1));
+        jPanel1.add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 440));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -121,35 +108,32 @@ public class Ventana3 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ventana3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ventana4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ventana3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ventana4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ventana3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ventana4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ventana3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ventana4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ventana3(v1).setVisible(true);
+                new Ventana4(v1).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LabelConocidos;
     private javax.swing.JLabel LabelNombre;
-    private javax.swing.JLabel background3;
-    private javax.swing.JTextArea conocidosUser;
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameUser;
     private javax.swing.JButton next;
-    private javax.swing.JLabel title3;
+    private javax.swing.JLabel title4;
     // End of variables declaration//GEN-END:variables
 }

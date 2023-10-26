@@ -4,7 +4,6 @@
  */
 package TDatos;
 
-import Objetos.NodoPersona;
 import javax.swing.JOptionPane;
 
 /**
@@ -234,49 +233,16 @@ public class Lista<T> {
         return false;
     }
     
-
-    public void insert_at_beginning(String name, Lista conocidos){
-        NodoPersona new_users = new NodoPersona(name, conocidos);
-        if (isEmpty()){
-            setHead(new_users);
-            setTail(new_users);
-            
-        }else{
-            new_users.setNext(getHead());
-            setHead(new_users);
-        }
-        setSize(getSize()+1);
-    }
+    //public void insertNode(T x, Nodo <T> pValor){
+     // postinsertar.   
+      //  Nodo <T> pNew= new Nodo <>(x);
+        //if (this.isEmpty()){
+          //  this.head=pNew;
+        //}else{
+          //  pNew.setNext(pValor.getNext());
+            //pValor.setNext(pNew);
+      //  }
+        //size++;
+    //}
     
-    public void insert_at_last(String name, Lista conocidos){
-        NodoPersona new_user = new NodoPersona(name, conocidos);
-        if(isEmpty()){
-            insert_at_beginning(name, conocidos);
-        }else{
-            getTail().setNext(new_user);
-            setTail(new_user);
-            setSize(getSize()+1);
-            
-        }
-    }
-    
-    
-    public void show_elements(Lista<NodoPersona> list){
-       if(isEmpty()){
-            JOptionPane.showMessageDialog(null, "La lista está vacía");
-        }else{
-            NodoPersona chain= list.getHead() ;
-            String show_element = "";
-            while (chain != null){
-                String name = chain.getName();
-                Lista known = chain.getconocidos();
-                String known_to_string = known.toString();
-                show_element += "Nombre: " + name +"\n"+ known_to_string +"\n";
-                chain = chain.getPnext();
-                JOptionPane.showMessageDialog(null, show_element);
-                
-            }
-        }
-    }
-} 
-    
+}

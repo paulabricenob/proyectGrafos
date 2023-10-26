@@ -4,14 +4,15 @@
  */
 package GUI;
 
+import Objetos.Funciones;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
+//import java.lang.System.Logger;
+//import java.lang.System.Logger.Level;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -21,7 +22,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author diego
  */
 public class Ventana2 extends javax.swing.JFrame {
-    
+    private Funciones f;
     public static Ventana1 v1;
 
     /**
@@ -34,7 +35,8 @@ public class Ventana2 extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null); //muestra la interfáz en el centro
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -126,9 +128,10 @@ public class Ventana2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void openFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileActionPerformed
+        //JFile Chooser, abrirmos un archivo.
         JFileChooser file = new JFileChooser();
         file.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de texto", "txt");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de texto", "txt"); //el archivo debe ser ajuro de tipo txt.
         file.setFileFilter(filter); //devuelve un valor entero dependiendo si se elige el boton de abrir o cancelar
         
         int ans = file.showOpenDialog(this);
@@ -148,6 +151,7 @@ public class Ventana2 extends javax.swing.JFrame {
         }
        
     }//GEN-LAST:event_openFileActionPerformed
+    //mostrar contenido del file
     public void showContent(String file_name) throws IOException{
         String line;
         try {
@@ -162,15 +166,14 @@ public class Ventana2 extends javax.swing.JFrame {
         }
     }
     
-    private String savefile(){
-        String name="";
+    private void savefile(){
         try{
            JFileChooser file = new JFileChooser();
             file.showSaveDialog(this);
             File save = file.getSelectedFile();
             if (save != null){
-                FileWriter sav = new FileWriter(sav +".txt");
-                sav.write(content.getText());
+                FileWriter sav = new FileWriter(save +".txt");
+                sav.write(route.getText());
                 sav.close();
                 JOptionPane.showMessageDialog(null,"El archivo se guardó exitosament", "Información:", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -181,10 +184,11 @@ public class Ventana2 extends javax.swing.JFrame {
     }
     
     private void saveTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTxtActionPerformed
-       
+        
+       // f.write_txt(content.getText());
         
     }//GEN-LAST:event_saveTxtActionPerformed
-
+    
     private void routeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeActionPerformed
         this.savefile();
     }//GEN-LAST:event_routeActionPerformed
@@ -194,8 +198,13 @@ public class Ventana2 extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void nextVentanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextVentanaActionPerformed
-        // mostrar un error si NO SE HA GUARDADO EN MEMORIA 
-        Ventana3 v3 = new Ventana3(this);
+        //if(saved){
+            v1.setVisible(true);
+            this.setVisible(false);
+       // }else{
+         //   JOptionPane.showMessageDialog(null, "ADVERTENCIA! Debe guardar el archivo descargado para continuar.");
+        //}
+        
     }//GEN-LAST:event_nextVentanaActionPerformed
 
     
