@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Objetos.Funciones;
 import TDatos.Grafo;
 
 /**
@@ -12,6 +13,7 @@ import TDatos.Grafo;
  */
 public class Ventana1 extends javax.swing.JFrame {
     Grafo grafo ;
+    Funciones f;
     public static Ventana2 v2;
     public static Ventana3 v3;
     

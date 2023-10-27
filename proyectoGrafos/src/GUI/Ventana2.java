@@ -5,6 +5,7 @@
 package GUI;
 
 import Objetos.Funciones;
+import TDatos.Grafo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,7 +23,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author diego
  */
 public class Ventana2 extends javax.swing.JFrame {
-    private Funciones f;
     public static Ventana1 v1;
 
     /**
@@ -184,7 +184,9 @@ public class Ventana2 extends javax.swing.JFrame {
     }
     
     private void saveTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTxtActionPerformed
-        
+       String info = content.getText();
+       v1.f.read_txt(info);
+       v1.f.write_Txt(info, "test\\usuarios.txt");
        // f.write_txt(content.getText());
         
     }//GEN-LAST:event_saveTxtActionPerformed

@@ -246,6 +246,7 @@ public class Grafo {
         }
     }
     //Verificar!!!
+    /*
     public void show_elements_Grafo(Grafo Usuarios){
         if(Usuarios.getusuarios().isEmpty()){
             JOptionPane.showMessageDialog(null, "El Grafo está vacío");
@@ -260,6 +261,7 @@ public class Grafo {
             }
         }
     }
+*/
 }
           
     

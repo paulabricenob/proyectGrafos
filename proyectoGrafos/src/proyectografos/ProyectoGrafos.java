@@ -4,11 +4,7 @@
  */
 package proyectografos;
 
-//import GUI.Ventana1;
-import Objetos.Funciones;
-import Objetos.Persona;
-import TDatos.Grafo;
-import TDatos.Lista;
+import GUI.Ventana1;
 
 /**
  *
@@ -20,22 +16,10 @@ public class ProyectoGrafos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        //Instanciamos las clases para usar el archivo txt
-        Funciones func= new Funciones();
-        Grafo users = new Grafo();
-        //Prueba de insertar...
-        users.addusuario("Paula");
-        users.AgregarArco("Paula", "Nicola");
-        //escribimos en el txt lo que insertamos
-        func.write_txt(users);
-        
-        Grafo users2 = func.read_txt();
-        users2.show_elements_Grafo(users);
         
         //instanciamos la ventana
-      //  Ventana1 ventana = new Ventana1();
-       // ventana.setVisible(true);
+        Ventana1 ventana = new Ventana1();
+        ventana.setVisible(true);
     }
     
 }

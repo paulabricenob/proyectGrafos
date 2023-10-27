@@ -101,7 +101,8 @@ public class Ventana3 extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        v1.setVisible(true);
     }//GEN-LAST:event_nextActionPerformed
 
     /**

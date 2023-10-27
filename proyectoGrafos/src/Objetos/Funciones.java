@@ -22,34 +22,76 @@ import java.io.IOException;
  */
 public class Funciones {
     //escribir en el txt
-    public void write_txt(Grafo usuarios){
-        String current_users = "";
-        if (!usuarios.getusuarios().isEmpty()){
-            Nodo<Persona> temp = usuarios.getusuarios().getHead();
-            for (int i=0; i < usuarios.getusuarios().len(); i++){
-                current_users += temp.getData().getName()+ "," + temp.getData().getconocidos() + "\n";
-                temp = temp.getNext();
+    public void write_Txt(Lista<Persona> usuarios ,String fileRoute) {
+        if ("".equals(fileRoute)){
+            JOptionPane.showMessageDialog(null, "Error! No hay ruta de acceso.");
+        } 
+        else{
+            String str = "Usuarios\n";
+            if (usuarios.isEmpty() == false){
+                for (int x = 0; x < usuarios.len(); x++){
+                    Persona person = usuarios.get(x);
+                    str =  person.getName() + "\n";
+                }
+                str = str + "Relaciones\n";
+                for (int x = 0; x < usuarios.len(); x++){
+                    Persona person = usuarios.get(x);
+                    Lista auxList = person.getconocidos();
+                    for (int y = 0; y < auxList.len(); y++){
+                        Arco edge = (Arco) auxList.get(y);
+                        if(edge != null){
+                            str += edge.getStart() + ", " + edge.getEnd() + "\n";                                             
+                        }
+                    }
+                }
+            }
+            try{
+               PrintWriter pw = new PrintWriter(fileRoute); 
+               pw.print(str);
+               pw.close();
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Error! No se ha escrito sobre el archivo.");
             }
         }
-        
-        try{
-           PrintWriter pw= new PrintWriter("test\\usuarios.txt");
-           //pw.print -- borra la info actual
-           pw.print(current_users); 
-           //pw.append -- agrega info
-           //pw.append("");
-           // revisar si podemos usar JOption Pane
-           JOptionPane.showMessageDialog(null, "Guardado exitoso");
-                     
-        }catch(IOException err){
-            //muestra el error
-            JOptionPane.showMessageDialog(null, err);
-        }
-    
     }
+    /*public void write_Txt(Grafo usuarios ,String fileRoute) {
+        if ("".equals(fileRoute)){
+            JOptionPane.showMessageDialog(null, "Error! No hay ruta de acceso.");
+        } 
+        else{
+            String str = "Usuarios\n";
+            if (usuarios.getusuarios().isEmpty() == false){
+                for (int x = 0; x < usuarios.getusuarios().len(); x++){
+                    Nodo<Persona> person = (Nodo<Persona>) usuarios.getusuarios().get(x);
+                    str =  person.getData().getName() + "\n";
+                }
+                str = str + "Relaciones\n";
+                for (int x = 0; x < usuarios.getusuarios().len(); x++){
+                    Nodo<Persona> person = (Nodo<Persona>) usuarios.getusuarios().get(x);
+                    Lista auxList = person.getData().getconocidos();
+                    for (int y = 0; y < auxList.len(); y++){
+                        Arco edge = (Arco) auxList.get(y);
+                        if(edge != null){
+                            str += edge.getStart() + ", " + edge.getEnd() + "\n";                                             
+                        }
+                    }
+                }
+            }
+            try{
+               PrintWriter pw = new PrintWriter(fileRoute); 
+               pw.print(str);
+               pw.close();
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Error! No se ha escrito sobre el archivo.");
+            }
+        }
+    }
+    */
+    
+
     
     //leer el txt
-    public Grafo read_txt(){
+    public Grafo read_txt(String text){
         Grafo graph = new Grafo();
         String line;
         String usuarios_txt = "";
