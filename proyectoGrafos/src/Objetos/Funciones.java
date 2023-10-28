@@ -15,6 +15,7 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 import java.io.IOException;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -22,6 +23,96 @@ import java.io.IOException;
  */
 public class Funciones {
     //escribir en el txt
+    /*public String select_files(){
+        String path;
+        JFileChooser search = new JFileChooser();
+        search.showOpenDialog(search);
+        path = search.getSelectedFile().getAbsolutePath();
+        return path;
+    }
+    */
+    public String leer_txt(String line){
+        Lista<Persona> usuarios = new Lista<Persona>();
+        String usuarios_txt = "";
+        String path = "test\\usuarios.txt";
+        File file = new File(path);
+        try{
+            if (!file.exists()){
+                file.createNewFile();
+            }else{
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
+                while((line = br.readLine()) != null){
+                    if(!line.isEmpty()){
+                        usuarios_txt += line + "\n";    
+                    }    
+                }
+                if(!"".equals(usuarios_txt)){
+                    String[]usuarios_split = usuarios_txt.split("relaciones");
+                    for (int i=0; i<usuarios_split.length;i++){
+                        
+                    }
+                }
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return usuarios_txt;
+    }    
+    
+    public Lista<Persona> ListaUsuarios(){
+        String data = leer_txt();
+        Lista<Persona> usuarios = new Lista<Persona>();
+        
+        String[] data_split = data.split("relaciones");
+        String[] data_users = data_split[0].split("\n");
+        String[] data_relations = data_split[1].split("\n");
+        for (int i=1; i<data_users.length;i++){
+            Lista relaciones = new Lista();
+            Persona user = new Persona((data_users[i].substring(1)), relaciones);
+            for (int j=0;j<data_relations.length;j++){
+                String[] relacion = data_relations[j].split(",");
+                if (("@"+user.getName()).equals(relacion[0])){
+                    String conocidos = relacion[1].substring(2);
+                    relaciones.append(conocidos);
+                }
+            }
+            user.setconocidos(relaciones);
+            usuarios.append(user);
+        }    
+        return usuarios;
+   
+    }
+        
+    
+    Grafo graph = new Grafo();
+    graph.crearGrafo()
+    Lista nombre = ListaUsuarios();
+    graph.setUsuarios(nombre);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
     public void write_Txt(Lista<Persona> usuarios ,String fileRoute) {
         if ("".equals(fileRoute)){
             JOptionPane.showMessageDialog(null, "Error! No hay ruta de acceso.");
@@ -54,7 +145,7 @@ public class Funciones {
             }
         }
     }
-    /*public void write_Txt(Grafo usuarios ,String fileRoute) {
+    public void write_Txt(Grafo usuarios ,String fileRoute) {
         if ("".equals(fileRoute)){
             JOptionPane.showMessageDialog(null, "Error! No hay ruta de acceso.");
         } 
@@ -86,12 +177,12 @@ public class Funciones {
             }
         }
     }
-    */
+    
     
 
     
     //leer el txt
-    public Grafo read_txt(String text){
+    public Grafo read_txt(){
         Grafo graph = new Grafo();
         String line;
         String usuarios_txt = "";
@@ -135,7 +226,7 @@ public class Funciones {
         return graph;
         
                 
-    }
+    }*/
             // OPCION DE CODIGO
               //  if(!"".equals(usuarios_txt)){
                  //   while(usuarios_txt.equals("usuarios")){

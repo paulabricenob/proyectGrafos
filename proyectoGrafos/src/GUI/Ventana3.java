@@ -4,12 +4,17 @@
  */
 package GUI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author diego
  */
 public class Ventana3 extends javax.swing.JFrame {
     public static Ventana1 v1;
+    public static String name_add = "";
+    public static String conocidos = "";
+
     /**
      * Creates new form Ventana3
      */
@@ -33,9 +38,6 @@ public class Ventana3 extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         LabelNombre = new javax.swing.JLabel();
         nameUser = new javax.swing.JTextField();
-        LabelConocidos = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        conocidosUser = new javax.swing.JTextArea();
         title3 = new javax.swing.JLabel();
         background3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -47,32 +49,30 @@ public class Ventana3 extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        LabelNombre.setFont(new java.awt.Font("Artifakt Element Book", 1, 18)); // NOI18N
+        LabelNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         LabelNombre.setText("Nombre del usuario:");
-        jPanel1.add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 190, 20));
-        jPanel1.add(nameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 330, 30));
+        jPanel1.add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 190, 20));
 
-        LabelConocidos.setFont(new java.awt.Font("Artifakt Element Book", 1, 18)); // NOI18N
-        LabelConocidos.setText("Relaciones del usuario:");
-        jPanel1.add(LabelConocidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 220, 20));
-
-        conocidosUser.setColumns(20);
-        conocidosUser.setRows(5);
-        jScrollPane1.setViewportView(conocidosUser);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 330, -1));
+        nameUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameUserActionPerformed(evt);
+            }
+        });
+        jPanel1.add(nameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 330, 30));
 
         title3.setFont(new java.awt.Font("Artifakt Element Heavy", 0, 36)); // NOI18N
         title3.setForeground(new java.awt.Color(0, 153, 255));
         title3.setText("AÑADIR USUARIO");
-        jPanel1.add(title3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, -1, -1));
+        jPanel1.add(title3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, -1, -1));
 
         background3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar-usuario.png"))); // NOI18N
         background3.setText("jLabel4");
-        jPanel1.add(background3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-160, -30, 500, 470));
+        jPanel1.add(background3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 0, 500, 470));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 51, 0));
         jLabel1.setText("@TUREDSOCIAL");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 410, -1, 10));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 430, -1, 30));
 
         exit.setForeground(new java.awt.Color(255, 0, 0));
         exit.setText("X");
@@ -81,17 +81,18 @@ public class Ventana3 extends javax.swing.JFrame {
                 exitActionPerformed(evt);
             }
         });
-        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 40, 20));
+        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, 40, 20));
 
+        next.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         next.setText("GUARDAR");
         next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextActionPerformed(evt);
             }
         });
-        jPanel1.add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, -1, -1));
+        jPanel1.add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 230, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 440));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 440));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -101,9 +102,26 @@ public class Ventana3 extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        this.setVisible(false);
-        v1.setVisible(true);
+        this.name_add = nameUser.getText();
+        try{
+            if (name_add.isEmpty()){
+               JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del uduario"); 
+            }else{
+                v1.grafo.addusuario(name_add);     
+                JOptionPane.showMessageDialog(null, "Se agregó con éxito al usuario:" + name_add);
+                this.setVisible(false);
+                v1.setVisible(true);
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error al leer el archivo de usuarios.");
+        }
+        //OJO FALTA QUE SE AGREGUE EN EL ARCHIVO TXT O DEJAR PARA ACTUALIZAR REPOSITORIO
+        
     }//GEN-LAST:event_nextActionPerformed
+
+    private void nameUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameUserActionPerformed
+   
+    }//GEN-LAST:event_nameUserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,14 +159,11 @@ public class Ventana3 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LabelConocidos;
     private javax.swing.JLabel LabelNombre;
     private javax.swing.JLabel background3;
-    private javax.swing.JTextArea conocidosUser;
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameUser;
     private javax.swing.JButton next;
     private javax.swing.JLabel title3;

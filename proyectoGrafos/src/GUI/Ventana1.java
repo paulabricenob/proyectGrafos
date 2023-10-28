@@ -4,8 +4,8 @@
  */
 package GUI;
 
-import Objetos.Funciones;
-import TDatos.Grafo;
+import Objetos.*;
+import TDatos.*;
 
 /**
  *
@@ -14,8 +14,12 @@ import TDatos.Grafo;
 public class Ventana1 extends javax.swing.JFrame {
     Grafo grafo ;
     Funciones f;
+    public static String archivo;
     public static Ventana2 v2;
     public static Ventana3 v3;
+    public static Ventana4 v4;
+    public static Ventana5 v5;
+    public static Ventana6 v6;
     
     
 
@@ -24,6 +28,7 @@ public class Ventana1 extends javax.swing.JFrame {
      */
     public Ventana1() {
         initComponents();
+        this.grafo = new Grafo() ;
         this.setVisible(true);
         this.setLocationRelativeTo(null);//muestra la interfáz en el centro
       
@@ -49,6 +54,13 @@ public class Ventana1 extends javax.swing.JFrame {
         design2 = new javax.swing.JLabel();
         showGraph = new javax.swing.JButton();
         updateRepository = new javax.swing.JButton();
+        addConocidos = new javax.swing.JButton();
+        deleteConocidos = new javax.swing.JButton();
+        design3 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        design4 = new javax.swing.JLabel();
+        design5 = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -62,7 +74,7 @@ public class Ventana1 extends javax.swing.JFrame {
         title.setFont(new java.awt.Font("Artifakt Element Heavy", 0, 60)); // NOI18N
         title.setForeground(new java.awt.Color(204, 0, 51));
         title.setText("TU RED SOCIAL");
-        jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
+        jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
 
         exit.setForeground(new java.awt.Color(255, 0, 0));
         exit.setText("X");
@@ -71,7 +83,7 @@ public class Ventana1 extends javax.swing.JFrame {
                 exitActionPerformed(evt);
             }
         });
-        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, 40, 20));
+        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, 40, 20));
 
         loadFile.setFont(new java.awt.Font("Artifakt Element Book", 1, 14)); // NOI18N
         loadFile.setText("DESCARGAR ARCHIVO");
@@ -80,7 +92,7 @@ public class Ventana1 extends javax.swing.JFrame {
                 loadFileActionPerformed(evt);
             }
         });
-        jPanel1.add(loadFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, -1, -1));
+        jPanel1.add(loadFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, -1, -1));
 
         addUser.setFont(new java.awt.Font("Artifakt Element Book", 1, 14)); // NOI18N
         addUser.setText("AÑADIR USUARIO");
@@ -89,12 +101,12 @@ public class Ventana1 extends javax.swing.JFrame {
                 addUserActionPerformed(evt);
             }
         });
-        jPanel1.add(addUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        jPanel1.add(addUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
 
         design1.setFont(new java.awt.Font("Artifakt Element Black", 1, 100)); // NOI18N
-        design1.setForeground(new java.awt.Color(0, 255, 51));
+        design1.setForeground(new java.awt.Color(0, 204, 102));
         design1.setText("+");
-        jPanel1.add(design1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
+        jPanel1.add(design1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
         deleteUser.setFont(new java.awt.Font("Artifakt Element Book", 1, 14)); // NOI18N
         deleteUser.setText("ELIMINAR USUARIO");
@@ -103,26 +115,72 @@ public class Ventana1 extends javax.swing.JFrame {
                 deleteUserActionPerformed(evt);
             }
         });
-        jPanel1.add(deleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, -1, -1));
+        jPanel1.add(deleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
         design2.setFont(new java.awt.Font("Artifakt Element Heavy", 1, 100)); // NOI18N
-        design2.setForeground(new java.awt.Color(255, 0, 0));
+        design2.setForeground(new java.awt.Color(204, 0, 0));
         design2.setText("-");
-        jPanel1.add(design2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, -1));
+        jPanel1.add(design2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
         showGraph.setFont(new java.awt.Font("Artifakt Element Book", 1, 14)); // NOI18N
         showGraph.setText("MOSTRAR RED SOCIAL");
-        jPanel1.add(showGraph, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+        showGraph.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showGraphActionPerformed(evt);
+            }
+        });
+        jPanel1.add(showGraph, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, -1, -1));
 
         updateRepository.setFont(new java.awt.Font("Artifakt Element Book", 1, 14)); // NOI18N
-        updateRepository.setText("ACTUALIZAR REPOSITORIO");
-        jPanel1.add(updateRepository, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, -1, -1));
+        updateRepository.setText("GUARDAR REPOSITORIO");
+        jPanel1.add(updateRepository, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 210, -1));
+
+        addConocidos.setFont(new java.awt.Font("Artifakt Element Book", 1, 14)); // NOI18N
+        addConocidos.setText("AÑADIR RELACIONES DE USUARIO");
+        addConocidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addConocidosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addConocidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
+
+        deleteConocidos.setFont(new java.awt.Font("Artifakt Element Book", 1, 14)); // NOI18N
+        deleteConocidos.setText("ELIMINAR RELACIONES DE USUARIO");
+        deleteConocidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteConocidosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(deleteConocidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, -1));
+
+        design3.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        design3.setForeground(new java.awt.Color(204, 204, 204));
+        design3.setText("->");
+        jPanel1.add(design3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel3.setText("->");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel4.setText("->");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+
+        design4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        design4.setForeground(new java.awt.Color(204, 204, 204));
+        design4.setText("->");
+        jPanel1.add(design4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
+
+        design5.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        design5.setForeground(new java.awt.Color(204, 204, 204));
+        design5.setText("->");
+        jPanel1.add(design5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/descarga.jpeg"))); // NOI18N
         background.setText("X");
-        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 690, 500));
+        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 530));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 500));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -143,6 +201,18 @@ public class Ventana1 extends javax.swing.JFrame {
     private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed
         Ventana4 v4 = new Ventana4(this);
     }//GEN-LAST:event_deleteUserActionPerformed
+
+    private void addConocidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConocidosActionPerformed
+        Ventana5 v5 = new Ventana5(this);
+    }//GEN-LAST:event_addConocidosActionPerformed
+
+    private void deleteConocidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteConocidosActionPerformed
+        Ventana6 v6 = new Ventana6(this);
+    }//GEN-LAST:event_deleteConocidosActionPerformed
+
+    private void showGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGraphActionPerformed
+        
+    }//GEN-LAST:event_showGraphActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,13 +250,20 @@ public class Ventana1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addConocidos;
     private javax.swing.JButton addUser;
     private javax.swing.JLabel background;
+    private javax.swing.JButton deleteConocidos;
     private javax.swing.JButton deleteUser;
     private javax.swing.JLabel design1;
     private javax.swing.JLabel design2;
+    private javax.swing.JLabel design3;
+    private javax.swing.JLabel design4;
+    private javax.swing.JLabel design5;
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loadFile;
     private javax.swing.JButton showGraph;

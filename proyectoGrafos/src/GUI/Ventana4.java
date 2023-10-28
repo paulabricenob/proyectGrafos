@@ -4,12 +4,15 @@
  */
 package GUI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author diego
  */
 public class Ventana4 extends javax.swing.JFrame {
     public static Ventana1 v1;
+    public static String name_delete = "";
     /**
      * Creates new form Ventana4
      */
@@ -47,19 +50,21 @@ public class Ventana4 extends javax.swing.JFrame {
         title4.setFont(new java.awt.Font("Artifakt Element Heavy", 0, 36)); // NOI18N
         title4.setForeground(new java.awt.Color(204, 0, 0));
         title4.setText("ELIMINAR USUARIO");
-        jPanel1.add(title4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
+        jPanel1.add(title4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, -1, -1));
 
-        LabelNombre.setFont(new java.awt.Font("Artifakt Element Book", 1, 18)); // NOI18N
+        LabelNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         LabelNombre.setText("Nombre del usuario:");
-        jPanel1.add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 190, 20));
-        jPanel1.add(nameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 330, 30));
+        jPanel1.add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 190, 20));
+        jPanel1.add(nameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 350, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/usuario.png"))); // NOI18N
         jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, -30, 520, 460));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 0, 520, 480));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 51, 0));
         jLabel2.setText("@TUREDSOCIAL");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 410, -1, 10));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, -1, 30));
 
         exit.setForeground(new java.awt.Color(255, 0, 0));
         exit.setText("X");
@@ -68,17 +73,18 @@ public class Ventana4 extends javax.swing.JFrame {
                 exitActionPerformed(evt);
             }
         });
-        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 40, 20));
+        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 40, 20));
 
+        next.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         next.setText("GUARDAR");
         next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextActionPerformed(evt);
             }
         });
-        jPanel1.add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, -1, -1));
+        jPanel1.add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 250, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 430));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -88,7 +94,27 @@ public class Ventana4 extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        // TODO add your handling code here:
+        this.name_delete = nameUser.getText();
+        try{
+            if (name_delete.isEmpty()){
+               JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del uduario"); 
+            }else{
+                for (int i=0; i < v1.grafo.getusuarios().len();i++){
+                    if(name_delete.equals(v1.grafo.getusuarios())){
+                        v1.grafo.EliminarPorNombre(name_delete);
+                        JOptionPane.showMessageDialog(null, "Se eliminió al usuario:" + name_delete);
+                        this.setVisible(false);
+                        v1.setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "ERROR! el usuario no se encuentra en el grafo");
+                    }
+      
+                }
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error al leer el archivo de usuarios.");
+        }
+        
     }//GEN-LAST:event_nextActionPerformed
 
     /**

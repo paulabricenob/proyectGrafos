@@ -6,6 +6,7 @@ package GUI;
 
 import Objetos.Funciones;
 import TDatos.Grafo;
+import TDatos.Lista;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,6 +25,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Ventana2 extends javax.swing.JFrame {
     public static Ventana1 v1;
+    public static String archivo;
+    public static Lista usuarios;
+    public static Grafo grafito;
 
     /**
      * Creates new form Ventana2
@@ -165,7 +169,7 @@ public class Ventana2 extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Ventana2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
-    
+    /*
     private void savefile(){
         try{
            JFileChooser file = new JFileChooser();
@@ -182,17 +186,25 @@ public class Ventana2 extends javax.swing.JFrame {
         
         }
     }
+    */
+    private void savefile(){
+        String info = content.getText();
+       try{
+            usuarios.append(info);
+            v1.f.write_Txt(usuarios, "test\\usuarios.txt");
+            v1.f.leer_txt();
+            v1.f.ListaUsuarios();
+       }catch(Exception e){
+           JOptionPane.showMessageDialog(null, e);
+       }
+    }
     
     private void saveTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTxtActionPerformed
-       String info = content.getText();
-       v1.f.read_txt(info);
-       v1.f.write_Txt(info, "test\\usuarios.txt");
-       // f.write_txt(content.getText());
-        
+       this.savefile();
     }//GEN-LAST:event_saveTxtActionPerformed
     
     private void routeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routeActionPerformed
-        this.savefile();
+
     }//GEN-LAST:event_routeActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
@@ -200,7 +212,10 @@ public class Ventana2 extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void nextVentanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextVentanaActionPerformed
-        //if(saved){
+
+        if (this.savefile()){
+            
+        }    
             v1.setVisible(true);
             this.setVisible(false);
        // }else{
