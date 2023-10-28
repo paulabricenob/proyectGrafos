@@ -132,7 +132,52 @@ public class Grafo {
             JOptionPane.showMessageDialog(null, "Error: dato ingresado incorrecto");
         }       
     }
+    
+    public void AgregarArcoinvertido(String end1, String start1){
+        try{
+            
+            NodoPersona personStart = Usuarios.get(UbicacionUsuario(end1));
+            NodoPersona personEnd = Usuarios.get(UbicacionUsuario(start1));
+            
+            if(end1 == start1){
+                JOptionPane.showMessageDialog(null, "Error: no se admite relacion con un mismo vertice");
+            }
+            
+            else if(Usuarios.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Error: no hay vertices");
+            }
+            
+            else if(edgeExist(end1, start1, personStart) || edgeExist(end1, start1, personEnd)){
+                JOptionPane.showMessageDialog(null, "Error: relacion ya establecida con anterioridad");
+            }  
+            
+            else{
+                for(int x = 0; x < Usuarios.len(); x++){
+                    int position = x;
+                    NodoPersona pAux = (NodoPersona) Usuarios.get(x);
 
+                    if(pAux.getName().equals(end1)){
+                        Arco arco = new Arco(end1, start1);
+                        Lista conocidos = pAux.getconocidos();
+                        conocidos.append(arco);
+                        pAux.setconocidos(conocidos);
+                        Usuarios.replace(position, pAux);                             
+                    }
+                    if(pAux.getName().equals(start1)){
+                        Arco arco = new Arco(end1, start1);
+                        Lista conocidos = pAux.getconocidos();
+                        conocidos.append(arco);
+                        pAux.setconocidos(conocidos);
+                        Usuarios.replace(position, pAux);                          
+                    }
+                }
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error: dato ingresado incorrecto");
+        }       
+    }
+    
 
     public void EliminarArco(String personA, String personB, int option){
         try{
