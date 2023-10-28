@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
  */
 public class Ventana6 extends javax.swing.JFrame {
     public static Ventana1 v1;
-    public static String user = "";
-    public static String delete_conocidos = "" ;
+    public static String name_user = "";
+    public static String delete_conocido = "" ;
 
     /**
      * Creates new form Ventana6
@@ -44,10 +44,9 @@ public class Ventana6 extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        conocidosUser = new javax.swing.JTextArea();
         exit = new javax.swing.JButton();
         next = new javax.swing.JButton();
+        conocidosUser = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -78,24 +77,18 @@ public class Ventana6 extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(204, 51, 0));
         jLabel3.setText("(ELIMINAR)");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, -1, -1));
-        jPanel2.add(nameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 510, 30));
+        jPanel2.add(nameUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 510, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/movil.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-180, 0, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setText("Nombre del Usuario:");
+        jLabel4.setText("Nombre del Usuario principal:");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel5.setText("Nombre del/los usuarios relacionados a él que se desean eliminar:  ");
+        jLabel5.setText("Nombre del usuario (relacionado al principal) que se desea eliminar:  ");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, -1, -1));
-
-        conocidosUser.setColumns(20);
-        conocidosUser.setRows(5);
-        jScrollPane1.setViewportView(conocidosUser);
-
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, 520, 160));
 
         exit.setForeground(new java.awt.Color(255, 0, 0));
         exit.setText("X");
@@ -113,7 +106,8 @@ public class Ventana6 extends javax.swing.JFrame {
                 nextActionPerformed(evt);
             }
         });
-        jPanel2.add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 430, -1, -1));
+        jPanel2.add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, -1, -1));
+        jPanel2.add(conocidosUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 510, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 500));
 
@@ -121,17 +115,35 @@ public class Ventana6 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        this.dispose();
+        this.setVisible(false);
+        v1.setVisible(true);
     }//GEN-LAST:event_exitActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        this.user = nameUser.getText();
-        this.delete_conocidos = conocidosUser.getText();
-        v1.grafo.EliminarArco(user, delete_conocidos, ERROR);
-        JOptionPane.showMessageDialog(null, "Se agregó con éxito la relación entre usuarios");
-        //OJO FALTA QUE SE AGREGUE EN EL ARCHIVO TXT O DEJAR PARA ACTUALIZAR REPOSITORIO
-        this.setVisible(false);
-        v1.setVisible(true);
+        this.name_user = nameUser.getText().toLowerCase();
+        try{
+            if (name_user.isEmpty()){
+               JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del usuario"); 
+            }else{
+                if (v1.grafo.EncontrarPersona(name_user) != null){
+                    this.delete_conocido = conocidosUser.getText().toLowerCase();
+                    if(v1.grafo.EncontrarPersona(delete_conocido)!= null){
+                        v1.grafo.EliminarArco(name_user, delete_conocido);
+                        JOptionPane.showMessageDialog(null, "Se eliminó con éxito la relación entre: " + name_user +" y "+ delete_conocido);
+                        this.setVisible(false);
+                        v1.setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "ERROR: el usuario "+ delete_conocido+ " no está añadido en el programa, intente registrarlo!");
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "ERROR: el usuario "+ name_user+ " no está añadido en el programa, intente registrarlo!");
+                }
+                
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error al leer el archivo de usuarios.");
+        }
+
     }//GEN-LAST:event_nextActionPerformed
 
     /**
@@ -170,7 +182,7 @@ public class Ventana6 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea conocidosUser;
+    private javax.swing.JTextField conocidosUser;
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -179,7 +191,6 @@ public class Ventana6 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameUser;
     private javax.swing.JButton next;
     private javax.swing.JLabel title5;

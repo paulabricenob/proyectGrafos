@@ -98,24 +98,27 @@ public class Ventana3 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        this.dispose();
+        this.setVisible(false);
+        v1.setVisible(true);
     }//GEN-LAST:event_exitActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        this.name_add = nameUser.getText();
+        this.name_add = nameUser.getText().toLowerCase();
         try{
             if (name_add.isEmpty()){
-               JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del uduario"); 
+               JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del usuario"); 
+            }else{
+                if (v1.grafo.EncontrarPersona(name_add) != null){
+                    JOptionPane.showMessageDialog(null, "ERROR el usuario ya esta registrado!");
+                }else{
+                    v1.grafo.addusuario(name_add);
+                    JOptionPane.showMessageDialog(null, "Se añadió con éxito al usuario " + name_add);
+                    this.setVisible(false);
+                    v1.setVisible(true);
+                }
+                
             }
-            if (!name_add.startsWith("@")){
-                JOptionPane.showMessageDialog(null, "ERROR! Debe empezar por '@' el usuario");
-            }
-            else{
-                v1.grafo.addusuario(name_add);     
-                JOptionPane.showMessageDialog(null, "Se agregó con éxito al usuario:" + name_add);
-                this.setVisible(false);
-                v1.setVisible(true);
-            }
+            
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error al leer el archivo de usuarios.");
         }

@@ -27,8 +27,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Ventana2 extends javax.swing.JFrame {
     public static Ventana1 v1;
     public static String archivo;
-    public static Lista usuarios;
-    public static Grafo grafito;
+    public static Lista users;
 
     /**
      * Creates new form Ventana2
@@ -36,7 +35,7 @@ public class Ventana2 extends javax.swing.JFrame {
     public Ventana2(Ventana1 v1) {
         initComponents();
         this.v1 = v1;
-        this.usuarios = new Lista<> ();
+        this.users = new Lista<> ();
         v1.setVisible(false);
         this.setVisible(true);
         this.setLocationRelativeTo(null); //muestra la interfáz en el centro
@@ -191,12 +190,11 @@ public class Ventana2 extends javax.swing.JFrame {
     private void savefile(){
        String info = content.getText();
        try{
-            usuarios.append(info);
-            v1.f.write_Txt(usuarios, "test\\usuarios.txt");
-            v1.f.leer_txt();
-            Lista usar = v1.f.ListaUsuarios();
-            v1.grafo.setususarios(usar);
+            users =v1.f.ListaUsuarios(info);
+            v1.f.write_Txt(users, "test\\usuarios.txt");
+            v1.grafo.setususarios(users);
             v1.grafo.ImprecionPR();
+            JOptionPane.showMessageDialog(null, "Guardado exitoso");
        }catch(Exception e){
            JOptionPane.showMessageDialog(null, e);
        }
@@ -211,19 +209,19 @@ public class Ventana2 extends javax.swing.JFrame {
     }//GEN-LAST:event_routeActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        this.dispose();
+        this.setVisible(false);
+        v1.setVisible(true);
     }//GEN-LAST:event_exitActionPerformed
 
     private void nextVentanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextVentanaActionPerformed
-
-       // if (this.savefile()){
-            
-        //}   
-            v1.setVisible(true);
-            this.setVisible(false);
-       // }else{
-         //   JOptionPane.showMessageDialog(null, "ADVERTENCIA! Debe guardar el archivo descargado para continuar.");
-        //}
+       archivo = v1.f.leer_txt();
+       if (archivo.isEmpty()){
+           JOptionPane.showMessageDialog(null, "ADVERTENCIA! Debe guardar el archivo descargado para continuar."); 
+        }else{
+           v1.setVisible(true);
+           this.setVisible(false);
+       } 
+       
         
     }//GEN-LAST:event_nextVentanaActionPerformed
 

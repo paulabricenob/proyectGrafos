@@ -23,19 +23,13 @@ import javax.swing.JFileChooser;
  */
 public class Funciones {
     //escribir en el txt
-    public String select_files(){
-        String path;
-        JFileChooser search = new JFileChooser();
-        search.showOpenDialog(search);
-        path = search.getSelectedFile().getAbsolutePath();
-        return path;
-    }
+    
     
     public String leer_txt(){
         Lista<Persona> usuarios = new Lista<Persona>();
         String line;
         String usuarios_txt = "";
-        String path = select_files();
+        String path = "test\\usuarios.txt";
         File file = new File(path);
         try{
             if (!file.exists()){
@@ -58,8 +52,8 @@ public class Funciones {
         return usuarios_txt;
     }    
     
-    public Lista<Persona> ListaUsuarios(){
-        String data = leer_txt();
+    public Lista<Persona> ListaUsuarios(String txt){
+        String data = txt;
         Lista<Persona> usuarios = new Lista<>();
         
         String[] data_split = data.split("relaciones");
@@ -95,11 +89,8 @@ public class Funciones {
             String str = "Usuarios\n";
             if (usuarios.isEmpty() == false){
                 for (int x = 0; x < usuarios.len(); x++){
-                    JOptionPane.showMessageDialog(null, "AAAAAAAA");
                     Persona person = (Persona) usuarios.get(x);
-                    JOptionPane.showMessageDialog(null, "EEEEEEEEEE");
-                    str =  str+ 
-                            person.getName() + "\n";
+                    str =  str+ "@" + person.getName() + "\n";
                 }
                 str = str + "Relaciones\n";
                 for (int x = 0; x < usuarios.len(); x++){

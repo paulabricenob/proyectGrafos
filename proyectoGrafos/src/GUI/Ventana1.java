@@ -14,7 +14,7 @@ import TDatos.*;
 public class Ventana1 extends javax.swing.JFrame {
     Grafo grafo ;
     Funciones f;
-    public static String archivo;
+    Lista<Persona> usuarios;
     public static Ventana2 v2;
     public static Ventana3 v3;
     public static Ventana4 v4;
@@ -30,6 +30,7 @@ public class Ventana1 extends javax.swing.JFrame {
         initComponents();
         this.grafo = new Grafo() ;
         this.f = new Funciones();
+        this.usuarios = new Lista();
         this.setVisible(true);
         this.setLocationRelativeTo(null);//muestra la interfáz en el centro
       
@@ -134,6 +135,11 @@ public class Ventana1 extends javax.swing.JFrame {
 
         updateRepository.setFont(new java.awt.Font("Artifakt Element Book", 1, 14)); // NOI18N
         updateRepository.setText("GUARDAR REPOSITORIO");
+        updateRepository.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateRepositoryActionPerformed(evt);
+            }
+        });
         jPanel1.add(updateRepository, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 210, -1));
 
         addConocidos.setFont(new java.awt.Font("Artifakt Element Book", 1, 14)); // NOI18N
@@ -214,6 +220,10 @@ public class Ventana1 extends javax.swing.JFrame {
     private void showGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGraphActionPerformed
         
     }//GEN-LAST:event_showGraphActionPerformed
+
+    private void updateRepositoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRepositoryActionPerformed
+        f.write_Txt(grafo.getusuarios(), "test\\usuarios.txt");
+    }//GEN-LAST:event_updateRepositoryActionPerformed
 
     /**
      * @param args the command line arguments

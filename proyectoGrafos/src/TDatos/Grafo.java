@@ -118,13 +118,6 @@ public class Grafo {
                         pAux.setconocidos(conocidos);
                         Usuarios.replace(position, pAux);                             
                     }
-                    if(pAux.getName().equals(end)){
-                        Arco arco = new Arco(start, end);
-                        Lista conocidos = pAux.getconocidos();
-                        conocidos.append(arco);
-                        pAux.setconocidos(conocidos);
-                        Usuarios.replace(position, pAux);                          
-                    }
                 }
             }
         }
@@ -134,13 +127,13 @@ public class Grafo {
     }
 
 
-    public void EliminarArco(String personA, String personB, int option){
+    public void EliminarArco(String personA, String personB){
         try{
             
             Persona pA = EncontrarPersona(personA);
             Persona pB = EncontrarPersona(personB);
             
-            if(!edgeExist(personA, personB, pA) && !edgeExist(personA, personB, pB) && option == 0){
+            if(!edgeExist(personA, personB, pA)){
                 JOptionPane.showMessageDialog(null, "Error: no existe relacion entre ambas personas");
             }
 

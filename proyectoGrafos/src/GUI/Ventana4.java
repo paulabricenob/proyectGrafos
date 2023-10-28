@@ -91,35 +91,26 @@ public class Ventana4 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        this.dispose();
+        this.setVisible(false);
+        v1.setVisible(true);
     }//GEN-LAST:event_exitActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        this.name_delete = nameUser.getText();
-        boolean run= true;
+        this.name_delete = nameUser.getText().toLowerCase();
         try{
             if (name_delete.isEmpty()){
-               JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del uduario"); 
+               JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del usuario"); 
             }else{
-                for(int x = 0; x < v1.grafo.getusuarios().len(); x++){
-                Persona pAux = (Persona) v1.grafo.getusuarios().get(x);
-                if(pAux.getName().equals(name_add)){
-                    run = false;
+                
+                if (v1.grafo.EncontrarPersona(name_delete) != null){
+                    v1.grafo.EliminarPorNombre(name_delete);
+                    JOptionPane.showMessageDialog(null, "Se eliminó con éxito al usuario " + name_delete);
+                    this.setVisible(false);
+                    v1.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "ERROR el usuario no está añadido en el programa, intente registrarlo!");
                 }
-                if(run){
-                v1.grafo.addusuario(name_add);
-                JOptionPane.showMessageDialog(null, "Se agregó con éxito al usuario:" + name_add);
-                this.setVisible(false);
-                v1.setVisible(true);
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Error: persona ya agregada");
-            }
-                v1.grafo.addusuario(name_add);     
-                JOptionPane.showMessageDialog(null, "Se agregó con éxito al usuario:" + name_add);
-                this.setVisible(false);
-                v1.setVisible(true);
-            }
+
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error al leer el archivo de usuarios.");
