@@ -29,6 +29,7 @@ public class Ventana1 extends javax.swing.JFrame {
     public Ventana1() {
         initComponents();
         this.grafo = new Grafo() ;
+        this.f = new Funciones();
         this.setVisible(true);
         this.setLocationRelativeTo(null);//muestra la interfáz en el centro
       

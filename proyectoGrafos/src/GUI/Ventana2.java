@@ -5,6 +5,7 @@
 package GUI;
 
 import Objetos.Funciones;
+import Objetos.Persona;
 import TDatos.Grafo;
 import TDatos.Lista;
 import java.io.BufferedReader;
@@ -35,6 +36,7 @@ public class Ventana2 extends javax.swing.JFrame {
     public Ventana2(Ventana1 v1) {
         initComponents();
         this.v1 = v1;
+        this.usuarios = new Lista<> ();
         v1.setVisible(false);
         this.setVisible(true);
         this.setLocationRelativeTo(null); //muestra la interfáz en el centro
@@ -93,7 +95,6 @@ public class Ventana2 extends javax.swing.JFrame {
         });
         jPanel1.add(route, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 310, 30));
 
-        content.setEditable(false);
         content.setBackground(new java.awt.Color(255, 204, 153));
         content.setColumns(20);
         content.setRows(5);
@@ -188,12 +189,14 @@ public class Ventana2 extends javax.swing.JFrame {
     }
     */
     private void savefile(){
-        String info = content.getText();
+       String info = content.getText();
        try{
             usuarios.append(info);
             v1.f.write_Txt(usuarios, "test\\usuarios.txt");
             v1.f.leer_txt();
-            v1.f.ListaUsuarios();
+            Lista usar = v1.f.ListaUsuarios();
+            v1.grafo.setususarios(usar);
+            v1.grafo.ImprecionPR();
        }catch(Exception e){
            JOptionPane.showMessageDialog(null, e);
        }
@@ -213,9 +216,9 @@ public class Ventana2 extends javax.swing.JFrame {
 
     private void nextVentanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextVentanaActionPerformed
 
-        if (this.savefile()){
+       // if (this.savefile()){
             
-        }    
+        //}   
             v1.setVisible(true);
             this.setVisible(false);
        // }else{

@@ -106,7 +106,11 @@ public class Ventana3 extends javax.swing.JFrame {
         try{
             if (name_add.isEmpty()){
                JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del uduario"); 
-            }else{
+            }
+            if (!name_add.startsWith("@")){
+                JOptionPane.showMessageDialog(null, "ERROR! Debe empezar por '@' el usuario");
+            }
+            else{
                 v1.grafo.addusuario(name_add);     
                 JOptionPane.showMessageDialog(null, "Se agregó con éxito al usuario:" + name_add);
                 this.setVisible(false);

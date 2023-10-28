@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Objetos.Persona;
 import javax.swing.JOptionPane;
 
 /**
@@ -95,21 +96,30 @@ public class Ventana4 extends javax.swing.JFrame {
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
         this.name_delete = nameUser.getText();
+        boolean run= true;
         try{
             if (name_delete.isEmpty()){
                JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del uduario"); 
             }else{
-                for (int i=0; i < v1.grafo.getusuarios().len();i++){
-                    if(name_delete.equals(v1.grafo.getusuarios())){
-                        v1.grafo.EliminarPorNombre(name_delete);
-                        JOptionPane.showMessageDialog(null, "Se eliminió al usuario:" + name_delete);
-                        this.setVisible(false);
-                        v1.setVisible(true);
-                    }else{
-                        JOptionPane.showMessageDialog(null, "ERROR! el usuario no se encuentra en el grafo");
-                    }
-      
+                for(int x = 0; x < v1.grafo.getusuarios().len(); x++){
+                Persona pAux = (Persona) v1.grafo.getusuarios().get(x);
+                if(pAux.getName().equals(name_add)){
+                    run = false;
                 }
+                if(run){
+                v1.grafo.addusuario(name_add);
+                JOptionPane.showMessageDialog(null, "Se agregó con éxito al usuario:" + name_add);
+                this.setVisible(false);
+                v1.setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Error: persona ya agregada");
+            }
+                v1.grafo.addusuario(name_add);     
+                JOptionPane.showMessageDialog(null, "Se agregó con éxito al usuario:" + name_add);
+                this.setVisible(false);
+                v1.setVisible(true);
+            }
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error al leer el archivo de usuarios.");
