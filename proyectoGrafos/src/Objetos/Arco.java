@@ -43,6 +43,6 @@ public class Arco {
         nodopersonaVisitado = true;
     }
 
-    
+
     
 }
