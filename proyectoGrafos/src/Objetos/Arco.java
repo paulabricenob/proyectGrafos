@@ -12,6 +12,7 @@ public class Arco {
 
     private String start;
     private String end;
+    private boolean nodopersonaVisitado = false;
     
 
     public Arco(String start, String end) {
@@ -36,6 +37,10 @@ public class Arco {
  
     public void setEnd(String end) {
         this.end = end;
+    }
+    
+    public void visitarNodoPersona(String name) {
+        nodopersonaVisitado = true;
     }
 
     

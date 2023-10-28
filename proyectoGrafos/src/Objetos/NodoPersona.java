@@ -14,7 +14,7 @@ public class NodoPersona {
     private String name;
     private NodoPersona pnext;
     private Lista<Arco> conocidos;
-    private boolean nodopersonaVisitado = false;
+    
     
     public NodoPersona(String name, Lista conocidos){
         this.name = name;
@@ -49,8 +49,5 @@ public class NodoPersona {
         this.conocidos = conocidos;
     }
     
-    public void visitarNodoPersona(String name) {
-        nodopersonaVisitado = true;
-    }
     
 }
