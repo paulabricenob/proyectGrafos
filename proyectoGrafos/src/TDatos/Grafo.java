@@ -254,6 +254,33 @@ public class Grafo {
             }
         }
     }
+    
+    public void kosaraju() {
+    Stack<NodoPersona> stack = new Stack<>();
+    boolean[] visited = new boolean[Usuarios.len()];
+
+    // Step 1: Fill the stack with the order of visited vertices
+    for (int i = 0; i < Usuarios.len(); i++) {
+        if (!visited[i]) {
+            DFSUtil(i, visited, stack);
+        }
+    }
+
+    // Step 2: Create a transposed graph
+
+    // Step 3: Reset the visited array
+    Arrays.fill(visited, false);
+
+    // Step 4: Perform DFS on the transposed graph
+    while (!stack.isEmpty()) {
+        NodoPersona vertex = stack.pop();
+        if (!visited[UbicacionUsuario(vertex.getName())]) {
+            // Print or store the strongly connected component
+            DFSUtil(UbicacionUsuario(vertex.getName()), visited);
+            System.out.println();
+        }
+    }
+}
 
 }
           

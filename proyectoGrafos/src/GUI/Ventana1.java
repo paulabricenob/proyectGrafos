@@ -6,8 +6,6 @@ package GUI;
 
 import Objetos.*;
 import TDatos.*;
-import org.graphstream.graph.*;
-import org.graphstream.graph.implementations.*;
 
 /**
  *
@@ -220,26 +218,8 @@ public class Ventana1 extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteConocidosActionPerformed
 
     private void showGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGraphActionPerformed
-        System.setProperty("org.graphstream.ui", "swing");
-        Graph graph = new SingleGraph("Tutorial 1");
-                graph.setAttribute("ui.stylesheet", "node { text-alignment: under; }");
-               
-                
-               
-                graph.addNode("A");
-                graph.addNode("B");
-                graph.addNode("C");
-                graph.addEdge("AB", "A", "B");
-                graph.addEdge("BC", "B", "C");
-                graph.addEdge("CA", "C", "A");
-                for (Node node : graph) {
-                node.setAttribute("ui.label", node.getId());
-                }
-               
-                for (Node node : graph) {
-                node.setAttribute("ui.style", "text-size: 25;");
-                }
-                graph.display();
+        Funciones instancia = new Funciones();
+        Funciones.Vergrafo();
     }//GEN-LAST:event_showGraphActionPerformed
 
     private void updateRepositoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRepositoryActionPerformed

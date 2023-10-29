@@ -16,6 +16,8 @@ import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 import java.io.IOException;
 import javax.swing.JFileChooser;
+import org.graphstream.graph.*;
+import org.graphstream.graph.implementations.*;
 
 /**
  *
@@ -114,7 +116,49 @@ public class Funciones {
         }
     }
     
+    public void Vergrafo(Lista usuarios ,String fileRoute) {
+        System.setProperty("org.graphstream.ui", "swing");
+        Graph graph = new SingleGraph("Tutorial 1");
 
+        if ("".equals(fileRoute)){
+            JOptionPane.showMessageDialog(null, "Error! No hay ruta de acceso.");
+        } 
+        else{
+            String str = "Usuarios\n";
+            if (usuarios.isEmpty() == false){
+                for (int x = 0; x < usuarios.len(); x++){
+                    Persona person = (Persona) usuarios.get(x);
+                    str =  str+ "@" + person.getName() + "\n";
+                    graph.addNode(person.getName());
+                }
+                str = str + "Relaciones\n";
+                for (int x = 0; x < usuarios.len(); x++){
+                    Persona person = (Persona) usuarios.get(x);
+                    Lista auxList = person.getconocidos();
+                    for (int y = 0; y < auxList.len(); y++){
+                        Arco edge = (Arco) auxList.get(y);
+                        if(edge != null){
+                            str += edge.getStart() + ", " + edge.getEnd() + "\n";
+                            graph.addEdge("CA", edge.getStart(), edge.getEnd());
+                        }
+                    }
+                }
+            }
+            
+        graph.setAttribute("ui.stylesheet", "node { text-alignment: under; }");
+               
+        for (Node node : graph) {
+        node.setAttribute("ui.label", node.getId());
+        }
+               
+        for (Node node : graph) {
+        node.setAttribute("ui.style", "text-size: 25;");
+        }
+        graph.display();
 
-
-}
+        }
+    }
+}        
+        
+       
+        
