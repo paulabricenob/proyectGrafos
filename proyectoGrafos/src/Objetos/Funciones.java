@@ -18,6 +18,7 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
+import org.graphstream.ui.view.Viewer;
 
 /**
  *
@@ -117,9 +118,50 @@ public class Funciones {
     }
     
     public void Vergrafo(Lista usuarios) {
+       
+        Grafo u = new Grafo();
         System.setProperty("org.graphstream.ui", "swing");
         Graph graph = new SingleGraph("Tutorial 1");
-            String str = "Usuarios\n";
+        Nodo<Persona> aux = usuarios.getHead();
+    
+        for (int x = 0; x < usuarios.len(); x++) {
+            graph.addNode(aux.getData().getName());
+            graph.getNode(aux.getData().getName()).setAttribute("ui.label", aux.getData().getName());
+            aux = aux.getNext();
+        }
+
+        Nodo<Persona> aux2 = usuarios.getHead();
+
+        for (int x = 0; x < usuarios.len(); x++) {
+            Nodo<Arco> aux3 = aux2.getData().getconocidos().getHead();
+
+            for (int y = 0; y < aux2.getData().getconocidos().getSize(); y++) {
+                String a = aux3.getData().getStart();
+                String b = aux3.getData().getEnd();
+                String c = a + b;
+
+                graph.addEdge(c, a, b);
+                graph.getEdge(c).setAttribute("ui.label", aux3.getData());
+                aux3 = aux3.getNext();
+            }
+
+            aux2 = aux2.getNext();
+        }
+
+        graph.setAttribute("ui.stylesheet", "node { text-alignment: under; }");
+
+        Viewer viewer = graph.display();
+        viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
+    }
+}
+    
+
+
+ 
+       
+       
+       
+   /*           String str = "Usuarios\n";
             if (usuarios.isEmpty() == false){
                 for (int x = 0; x < usuarios.len(); x++){
                     Persona person = (Persona) usuarios.get(x);
@@ -138,25 +180,4 @@ public class Funciones {
                         }
                     }
                 }
-            }
-            
-        graph.setAttribute("ui.stylesheet", "node { text-alignment: under; }");
-               
-        for (Node node : graph) {
-        node.setAttribute("ui.label", node.getId());
-        }
-               
-        for (Node node : graph) {
-        node.setAttribute("ui.style", "text-size: 25;");
-        }
-        
-        graph.display();
-
-        }
-    
-    
- }
-       
-        
-       
-        
+            }*/ 

@@ -219,8 +219,8 @@ public class Ventana1 extends javax.swing.JFrame {
 
     private void showGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGraphActionPerformed
         Funciones funciones = new Funciones();
-        Lista usuar = funciones.ListaUsuarios("test\\usuarios.txt");
-        funciones.Vergrafo(usuar);
+        Lista ur = grafo.getusuarios();
+        funciones.Vergrafo(ur);
     }//GEN-LAST:event_showGraphActionPerformed
 
     private void updateRepositoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRepositoryActionPerformed
