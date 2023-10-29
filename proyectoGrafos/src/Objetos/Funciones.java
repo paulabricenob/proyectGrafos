@@ -116,14 +116,9 @@ public class Funciones {
         }
     }
     
-    public void Vergrafo(Lista usuarios ,String fileRoute) {
+    public void Vergrafo(Lista usuarios) {
         System.setProperty("org.graphstream.ui", "swing");
         Graph graph = new SingleGraph("Tutorial 1");
-
-        if ("".equals(fileRoute)){
-            JOptionPane.showMessageDialog(null, "Error! No hay ruta de acceso.");
-        } 
-        else{
             String str = "Usuarios\n";
             if (usuarios.isEmpty() == false){
                 for (int x = 0; x < usuarios.len(); x++){
@@ -139,7 +134,7 @@ public class Funciones {
                         Arco edge = (Arco) auxList.get(y);
                         if(edge != null){
                             str += edge.getStart() + ", " + edge.getEnd() + "\n";
-                            graph.addEdge("CA", edge.getStart(), edge.getEnd());
+                            graph.addEdge(edge.getStart()+edge.getEnd(), edge.getStart(), edge.getEnd());
                         }
                     }
                 }
@@ -154,11 +149,14 @@ public class Funciones {
         for (Node node : graph) {
         node.setAttribute("ui.style", "text-size: 25;");
         }
+        
         graph.display();
 
         }
-    }
-}        
+    
+    
+ }
+       
         
        
         

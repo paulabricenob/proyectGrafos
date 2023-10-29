@@ -6,6 +6,7 @@ package TDatos;
 //import Objetos.Funciones;
 import Objetos.Arco;
 import Objetos.Persona;
+import Objetos.Funciones;
 import javax.swing.JOptionPane;
 
 public class Grafo {
@@ -126,7 +127,52 @@ public class Grafo {
         }       
     }
 
+    public void AgregarArcoinvertido(String end1, String start1){
+        try{
+            
+            Persona personStart = Usuarios.get(UbicacionUsuario(end1));
+            Persona personEnd = Usuarios.get(UbicacionUsuario(start1));
+            
+            if(end1 == start1){
+                JOptionPane.showMessageDialog(null, "Error: no se admite relacion con un mismo vertice");
+            }
+            
+            else if(Usuarios.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Error: no hay vertices");
+            }
+            
+            else if(edgeExist(end1, start1, personStart) || edgeExist(end1, start1, personEnd)){
+                JOptionPane.showMessageDialog(null, "Error: relacion ya establecida con anterioridad");
+            }  
+            
+            else{
+                for(int x = 0; x < Usuarios.len(); x++){
+                    int position = x;
+                    Persona pAux = (Persona) Usuarios.get(x);
 
+                    if(pAux.getName().equals(end1)){
+                        Arco arco = new Arco(end1, start1);
+                        Lista conocidos = pAux.getconocidos();
+                        conocidos.append(arco);
+                        pAux.setconocidos(conocidos);
+                        Usuarios.replace(position, pAux);                             
+                    }
+                    if(pAux.getName().equals(start1)){
+                        Arco arco = new Arco(end1, start1);
+                        Lista conocidos = pAux.getconocidos();
+                        conocidos.append(arco);
+                        pAux.setconocidos(conocidos);
+                        Usuarios.replace(position, pAux);                          
+                    }
+                }
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error: dato ingresado incorrecto");
+        }
+    }
+    
+    
     public void EliminarArco(String personA, String personB){
         try{
             
@@ -254,9 +300,9 @@ public class Grafo {
             }
         }
     }
-    
+  /* 
     public void kosaraju() {
-    Stack<NodoPersona> stack = new Stack<>();
+    Pila<Persona> stack = new Pila<>();
     boolean[] visited = new boolean[Usuarios.len()];
 
     // Step 1: Fill the stack with the order of visited vertices
@@ -279,9 +325,56 @@ public class Grafo {
             DFSUtil(UbicacionUsuario(vertex.getName()), visited);
             System.out.println();
         }
+      }
     }
-}
+    
+    
+    public void Listaad(String[] args){
+        Funciones funciones = new Funciones();
+        Grafo Usuarios = new Grafo();
+        String ruta = funciones.ObtenerRutaTXT();
+        list usuar = funciones
+        
+    }
+    
+    
+    
+    public Grafo regresargrafovolt(Grafo x){
+        
+    }
+    
+    
+    
+    private void DFSUtil(int v, boolean[] visited, Pila<Persona> stack) {
+    visited[v] = true;
+    Persona vertex = Usuarios.get(v);
+    Lista conocidos = vertex.getconocidos();
+    for (int i = 0; i < conocidos.len(); i++) {
+        Arco arco = (Arco) conocidos.get(i);
+        int adjacentVertexIndex = UbicacionUsuario(arco.getEnd());
+        if (!visited[adjacentVertexIndex]) {
+            DFSUtil(adjacentVertexIndex, visited, stack);
+        }
+     }
+     stack.push(vertex);
+    }
 
+    private void DFSUtil(int v, boolean[] visited) {
+      visited[v] = true;
+      Persona vertex = Usuarios.get(v);
+      System.out.print(vertex.getName() + " ");
+
+      Lista conocidos = vertex.getconocidos();
+      for (int i = 0; i < conocidos.len(); i++) {
+        Arco arco = (Arco) conocidos.get(i);
+        int adjacentVertexIndex = UbicacionUsuario(arco.getEnd());
+        if (!visited[adjacentVertexIndex]) {
+            DFSUtil(adjacentVertexIndex, visited);
+        }
+     }
+    }
+    
+    */
 }
           
     
