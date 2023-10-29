@@ -103,7 +103,7 @@ public class Ventana3 extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        this.name_add = nameUser.getText().toLowerCase();
+        this.name_add = "@" + nameUser.getText().toLowerCase();
         try{
             if (name_add.isEmpty()){
                JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del usuario"); 

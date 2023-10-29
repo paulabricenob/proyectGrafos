@@ -69,10 +69,10 @@ public class Funciones {
         
         for (int i=1; i<data_users.length;i++){
             Lista relaciones = new Lista();
-            Persona user = new Persona((data_users[i].substring(1)), relaciones);
+            Persona user = new Persona((data_users[i]), relaciones);
             for (int j=0;j<data_relations.length;j++){
-                String[] relacion = data_relations[j].split(",");
-                if (("@"+user.getName()).equals(relacion[0])){
+                String[] relacion = data_relations[j].split(", ");
+                if ((user.getName()).equals(relacion[0])){
                     Arco arc = new Arco(relacion[0], relacion[1]);
                     relaciones.append(arc);
                 }
@@ -89,13 +89,13 @@ public class Funciones {
             JOptionPane.showMessageDialog(null, "Error! No hay ruta de acceso.");
         } 
         else{
-            String str = "Usuarios\n";
+            String str = "usuarios\n";
             if (usuarios.isEmpty() == false){
                 for (int x = 0; x < usuarios.len(); x++){
                     Persona person = (Persona) usuarios.get(x);
-                    str =  str+ "@" + person.getName() + "\n";
+                    str =  str + person.getName() + "\n";
                 }
-                str = str + "Relaciones\n";
+                str = str + "relaciones\n";
                 for (int x = 0; x < usuarios.len(); x++){
                     Persona person = (Persona) usuarios.get(x);
                     Lista auxList = person.getconocidos();
@@ -117,43 +117,43 @@ public class Funciones {
         }
     }
     
-    public void Vergrafo(Lista usuarios) {
-       
-        Grafo u = new Grafo();
-        System.setProperty("org.graphstream.ui", "swing");
-        Graph graph = new SingleGraph("Tutorial 1");
-        Nodo<Persona> aux = usuarios.getHead();
-    
-        for (int x = 0; x < usuarios.len(); x++) {
-            graph.addNode(aux.getData().getName());
-            graph.getNode(aux.getData().getName()).setAttribute("ui.label", aux.getData().getName());
-            aux = aux.getNext();
-        }
+public void Vergrafo(Lista usuarios) {
+    Grafo u = new Grafo();
+    System.setProperty("org.graphstream.ui", "swing");
+    Graph graph = new SingleGraph("Tutorial 1");
+    Nodo<Persona> aux = usuarios.getHead();
 
-        Nodo<Persona> aux2 = usuarios.getHead();
-
-        for (int x = 0; x < usuarios.len(); x++) {
-            Nodo<Arco> aux3 = aux2.getData().getconocidos().getHead();
-
-            for (int y = 0; y < aux2.getData().getconocidos().getSize(); y++) {
-                String a = aux3.getData().getStart();
-                String b = aux3.getData().getEnd();
-                String c = a + b;
-
-                graph.addEdge(c, a, b);
-                graph.getEdge(c).setAttribute("ui.label", aux3.getData());
-                aux3 = aux3.getNext();
-            }
-
-            aux2 = aux2.getNext();
-        }
-
-        graph.setAttribute("ui.stylesheet", "node { text-alignment: under; }");
-
-        Viewer viewer = graph.display();
-        viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
+    for (int x = 0; x < usuarios.len(); x++) {
+        graph.addNode(aux.getData().getName());
+        graph.getNode(aux.getData().getName()).setAttribute("ui.label", aux.getData().getName());
+        aux = aux.getNext();
     }
+
+    Nodo<Persona> aux2 = usuarios.getHead();
+
+    for (int x = 0; x < usuarios.len(); x++) {
+        Nodo<Arco> aux3 = aux2.getData().getconocidos().getHead();
+
+        for (int y = 0; y < aux2.getData().getconocidos().getSize(); y++) {
+            String a = aux3.getData().getStart();
+            String b = aux3.getData().getEnd();
+            String c = a + b;
+
+            Edge edge = graph.addEdge(c, a, b);
+            edge.setAttribute("ui.label", "");
+            aux3 = aux3.getNext();
+        }
+
+        aux2 = aux2.getNext();
+    }
+
+    graph.setAttribute("ui.stylesheet", "node { text-alignment: under; }");
+
+    Viewer viewer = graph.display();
+    viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
+ }
 }
+
     
 
 

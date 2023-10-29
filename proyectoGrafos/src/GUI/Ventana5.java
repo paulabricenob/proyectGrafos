@@ -123,7 +123,7 @@ public class Ventana5 extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        this.name_user = nameUser.getText().toLowerCase();
+        this.name_user = "@" + nameUser.getText().toLowerCase();
         try{
             if (name_user.isEmpty()){
                JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del usuario"); 
@@ -131,7 +131,7 @@ public class Ventana5 extends javax.swing.JFrame {
             }else{
                 
                 if (v1.grafo.EncontrarPersona(name_user) != null){
-                    this.add_conocido = conocidosUser.getText().toLowerCase();
+                    this.add_conocido = "@" + conocidosUser.getText().toLowerCase();
                     if (v1.grafo.edgeExist(name_user, add_conocido, v1.grafo.EncontrarPersona(name_user))){
                        JOptionPane.showMessageDialog(null, "La relación entre: " + name_user +" y "+ add_conocido+" ya existe!"); 
 

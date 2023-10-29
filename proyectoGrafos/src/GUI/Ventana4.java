@@ -96,7 +96,7 @@ public class Ventana4 extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        this.name_delete = nameUser.getText().toLowerCase();
+        this.name_delete ="@" + nameUser.getText().toLowerCase();
         try{
             if (name_delete.isEmpty()){
                JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del usuario"); 

@@ -120,13 +120,13 @@ public class Ventana6 extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        this.name_user = nameUser.getText().toLowerCase();
+        this.name_user = "@" + nameUser.getText().toLowerCase();
         try{
             if (name_user.isEmpty()){
                JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del usuario"); 
             }else{
                 if (v1.grafo.EncontrarPersona(name_user) != null){
-                    this.delete_conocido = conocidosUser.getText().toLowerCase();
+                    this.delete_conocido =  "@" +conocidosUser.getText().toLowerCase();
                     if(v1.grafo.EncontrarPersona(delete_conocido)!= null){
                         v1.grafo.EliminarArco(name_user, delete_conocido);
                         JOptionPane.showMessageDialog(null, "Se eliminó con éxito la relación entre: " + name_user +" y "+ delete_conocido);
