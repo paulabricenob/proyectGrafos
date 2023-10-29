@@ -28,11 +28,16 @@ public class Ventana1 extends javax.swing.JFrame {
      */
     public Ventana1() {
         initComponents();
+        Funciones funciones = new Funciones();
         this.grafo = new Grafo() ;
         this.f = new Funciones();
         this.usuarios = new Lista();
         this.setVisible(true);
         this.setLocationRelativeTo(null);//muestra la interfáz en el centro
+        Lista<Persona> usuarios = funciones.usuarios;
+        grafo.setususarios(usuarios);
+        
+        
       
     }
 
@@ -257,7 +262,9 @@ public class Ventana1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 new Ventana1().setVisible(true);
+                
             }
         });
     }

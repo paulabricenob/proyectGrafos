@@ -29,7 +29,6 @@ public class Funciones {
     
     
     public String leer_txt(){
-        Lista<Persona> usuarios = new Lista<Persona>();
         String line;
         String usuarios_txt = "";
         String path = "test\\usuarios.txt";
@@ -46,14 +45,16 @@ public class Funciones {
                     }    
                 }
                 if(!"".equals(usuarios_txt)){
-                    String[]usuarios_split = usuarios_txt.split("relaciones");
+                    return usuarios_txt;
                 }
+
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
-        return usuarios_txt;
-    }    
+       return usuarios_txt;
+    }
+            
     
     public Lista<Persona> ListaUsuarios(String txt){
         String data = txt;
@@ -152,6 +153,10 @@ public void Vergrafo(Lista usuarios) {
     Viewer viewer = graph.display();
     viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
  }
+
+    String txt = leer_txt();
+    public Lista<Persona> usuarios = ListaUsuarios(txt);
+
 }
 
     
