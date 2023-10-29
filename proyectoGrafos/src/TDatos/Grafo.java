@@ -9,23 +9,37 @@ import Objetos.Persona;
 import Objetos.Funciones;
 import javax.swing.JOptionPane;
 
+
+
+
+/**
+
+ * Esta clase define el objeto Grafo, con la cual tiene diferentes atributos y funciones que lo definen
+
+ * @author: Vincenzo Miraglia, Paula Briceño, Nicola Colaruso
+
+ * @version: 24/10/2023/A
+
+ */
+
 public class Grafo {
     private Lista<Persona> Usuarios;
     private Lista<Arco> conocidos;
-
+//Campos de la clase
+    //constructor
     public Grafo() {
         this.Usuarios = new Lista();
     }  
-
+//getter
     public Lista getusuarios() {
         return Usuarios;
     }
-
+//setter
     public void setususarios(Lista Usuarios) {
         this.Usuarios = Usuarios;
     }
 
-
+// Esta funcion de la clase sirve para retornar la ubicacion del usuario
     public int UbicacionUsuario(String name){
         for(int x = 0; x < Usuarios.len(); x++){
             if(Usuarios.get(x).getName().equals(name)){
@@ -34,7 +48,7 @@ public class Grafo {
         }
         return -1;
     }
-
+// Esta funcion de la clase sirve para retornar y encontrar una persona
     public Persona EncontrarPersona(String name){
         for(int x = 0; x < Usuarios.len(); x++){
             Persona person = Usuarios.get(x);
@@ -44,7 +58,7 @@ public class Grafo {
         }
         return null;
     }
-    
+// Esta funcion de la clase sirve para coniocer si una arista existe   
     public boolean edgeExist(String start, String end, Persona person){
         Lista conocidos = person.getconocidos();
         if(conocidos.isEmpty() == true){
@@ -64,7 +78,7 @@ public class Grafo {
         }
     }
     
-    
+ // Esta funcion de la clase sirve para añadir usuario  
     public boolean addusuario(String name){
         this.conocidos = new Lista();
         Persona person = new Persona(name, conocidos);       
@@ -88,7 +102,7 @@ public class Grafo {
         }
         return run;
     }
-
+//Este metodo sirve para agregar un arco"arista" al grafo
     public void AgregarArco(String start, String end){
         try{
             
@@ -126,6 +140,7 @@ public class Grafo {
             JOptionPane.showMessageDialog(null, "Error: dato ingresado incorrecto");
         }       
     }
+//Este metodo sirve para agregar un arco"arista" invertida al grafo transpuesto
 
     public void AgregarArcoinvertido(String end1, String start1){
         try{
@@ -172,7 +187,58 @@ public class Grafo {
         }
     }
     
+// Funcion que devuelve persona utilizando los indices    
+    public Persona encontrarPersonaConIndice(int Indice){ 
+       return Usuarios.get(Indice);
     
+    }
+// Funcion si existe relacion entre dos usuarios    
+    public boolean edgeExist2(String start, String end) {
+        for (int x = 0; x < Usuarios.len(); x++) {
+            Persona persona = encontrarPersonaConIndice(x);
+            if (persona.getName().equals(start)) {
+                Lista<Arco> conocidos = persona.getconocidos();
+                for (int y = 0; y < conocidos.len(); y++) {
+                    Arco arco = conocidos.get(y);
+                    if (arco.getStart().equals(start) && arco.getEnd().equals(end)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+ // Esta funcion de la clase sirve para retornar un grafo transpuesto   
+    public Grafo getTransposedGraph() {
+    Grafo transposedGraph = new Grafo();
+    Lista<Persona> usuarios = this.getusuarios();
+
+    // Itera sobre el grafo original
+    for (int i = 0; i < usuarios.len(); i++) {
+        Persona user = usuarios.get(i);
+        String name = user.getName();
+
+        // Crea un nuevo usuario en el grafo transpuesto
+        transposedGraph.addusuario(name);
+
+        // Itera sobre cada usuario
+        Lista<Arco> conocidos = user.getconocidos();
+        for (int j = 0; j < conocidos.len(); j++) {
+            Arco arco = conocidos.get(j);
+            String start = arco.getStart();
+            String end = arco.getEnd();
+
+            // Añade los arcos en el grafo transpuesto de cada usuario
+            transposedGraph.AgregarArco(end, start);
+        }
+    }
+
+    return transposedGraph;
+    }
+    
+ //Este metodo sirve para eliminar un arco"Arista" del grafo
+
     public void EliminarArco(String personA, String personB){
         try{
             
@@ -201,31 +267,13 @@ public class Grafo {
                 }
                 
             }
-
-            Lista conocidosB = pB.getconocidos();
-            for (int x = 0; x < conocidosB.len(); x++) {
-                Arco e = (Arco) conocidosB.get(x);
-                if(e.getStart().equals(personA) && e.getEnd().equals(personB)){
-                    conocidosB.pop(x);
-                    pB.setconocidos(conocidosB);
-                    int position = UbicacionUsuario(pB.getName());
-                    Usuarios.replace(position, pB);
-                }
-               
-                if(e.getEnd().equals(personA) && e.getStart().equals(personB)){
-                    conocidosB.pop(x);
-                    pB.setconocidos(conocidosB);
-                    int position = UbicacionUsuario(pB.getName());
-                    Usuarios.replace(position, pB);
-                }
-                
-            }
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error: data ingresado no valido");
         }
     }
-    
+ //Este metodo sirve para eliminar un usuario por nombre del grafo
+
     public void EliminarPorNombre(String name ){ 
         Persona Persona = null;
         for(int x = 0; x < Usuarios.len(); x++){          
@@ -253,6 +301,7 @@ public class Grafo {
             }
         }       
     }
+ //Este metodo sirve para la imprecionPR del grafo
 
     public void ImprecionPR(){
         for(int x = 0; x < Usuarios.len(); x++){
@@ -284,8 +333,8 @@ public class Grafo {
             }
         }
     }
-    //Verificar!!!
-    
+     //Este metodo sirve para mostrar los elemntos del grafo
+
     public void show_elements_Grafo(Grafo Usuarios){
         if(Usuarios.getusuarios().isEmpty()){
             JOptionPane.showMessageDialog(null, "El Grafo está vacío");
@@ -300,85 +349,5 @@ public class Grafo {
             }
         }
     }
-  /* 
-    public void kosaraju() {
-    Pila<Persona> stack = new Pila<>();
-    boolean[] visited = new boolean[Usuarios.len()];
-
-    // Step 1: Fill the stack with the order of visited vertices
-    for (int i = 0; i < Usuarios.len(); i++) {
-        if (!visited[i]) {
-            DFSUtil(i, visited, stack);
-        }
-    }
-
-    // Step 2: Create a transposed graph
-
-    // Step 3: Reset the visited array
-    Arrays.fill(visited, false);
-
-    // Step 4: Perform DFS on the transposed graph
-    while (!stack.isEmpty()) {
-        NodoPersona vertex = stack.pop();
-        if (!visited[UbicacionUsuario(vertex.getName())]) {
-            // Print or store the strongly connected component
-            DFSUtil(UbicacionUsuario(vertex.getName()), visited);
-            System.out.println();
-        }
-      }
-    }
     
-    
-    public void Listaad(String[] args){
-        Funciones funciones = new Funciones();
-        Grafo Usuarios = new Grafo();
-        String ruta = funciones.ObtenerRutaTXT();
-        list usuar = funciones
-        
-    }
-    
-    
-    
-    public Grafo regresargrafovolt(Grafo x){
-        
-    }
-    
-    
-    
-    private void DFSUtil(int v, boolean[] visited, Pila<Persona> stack) {
-    visited[v] = true;
-    Persona vertex = Usuarios.get(v);
-    Lista conocidos = vertex.getconocidos();
-    for (int i = 0; i < conocidos.len(); i++) {
-        Arco arco = (Arco) conocidos.get(i);
-        int adjacentVertexIndex = UbicacionUsuario(arco.getEnd());
-        if (!visited[adjacentVertexIndex]) {
-            DFSUtil(adjacentVertexIndex, visited, stack);
-        }
-     }
-     stack.push(vertex);
-    }
-
-    private void DFSUtil(int v, boolean[] visited) {
-      visited[v] = true;
-      Persona vertex = Usuarios.get(v);
-      System.out.print(vertex.getName() + " ");
-
-      Lista conocidos = vertex.getconocidos();
-      for (int i = 0; i < conocidos.len(); i++) {
-        Arco arco = (Arco) conocidos.get(i);
-        int adjacentVertexIndex = UbicacionUsuario(arco.getEnd());
-        if (!visited[adjacentVertexIndex]) {
-            DFSUtil(adjacentVertexIndex, visited);
-        }
-     }
-    }
-    
-    */
 }
-          
-    
-
-
-
-

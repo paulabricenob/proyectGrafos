@@ -118,31 +118,36 @@ public class Ventana6 extends javax.swing.JFrame {
         this.setVisible(false);
         v1.setVisible(true);
     }//GEN-LAST:event_exitActionPerformed
-
+    //ELIMINAR RELACIONES DE USUARIOS EN GRAFO
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        this.name_user = "@" + nameUser.getText().toLowerCase();
-        try{
-            if (name_user.isEmpty()){
-               JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del usuario"); 
-            }else{
-                if (v1.grafo.EncontrarPersona(name_user) != null){
-                    this.delete_conocido =  "@" +conocidosUser.getText().toLowerCase();
-                    if(v1.grafo.EncontrarPersona(delete_conocido)!= null){
+          this.name_user = "@" + nameUser.getText().toLowerCase();
+    try {
+        if (name_user.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del usuario");
+        } else {
+            if (v1.grafo.EncontrarPersona(name_user) != null) {
+                this.delete_conocido = "@" + conocidosUser.getText().toLowerCase();
+                //COMPROBACIONES PARA EVITAR ERRORES MEDIANTE JOPTIONPANE
+                if (v1.grafo.EncontrarPersona(delete_conocido) != null) {
+                    if (v1.grafo.edgeExist2(name_user, delete_conocido)) {
                         v1.grafo.EliminarArco(name_user, delete_conocido);
-                        JOptionPane.showMessageDialog(null, "Se eliminó con éxito la relación entre: " + name_user +" y "+ delete_conocido);
+                        JOptionPane.showMessageDialog(null, "Se eliminó con éxito la relación entre: " + name_user + " y " + delete_conocido);
                         this.setVisible(false);
                         v1.setVisible(true);
-                    }else{
-                        JOptionPane.showMessageDialog(null, "ERROR: el usuario "+ delete_conocido+ " no está añadido en el programa, intente registrarlo!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "ERROR: la relación no existe entre " + name_user + " y " + delete_conocido);
                     }
-                }else{
-                    JOptionPane.showMessageDialog(null, "ERROR: el usuario "+ name_user+ " no está añadido en el programa, intente registrarlo!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR: el usuario " + delete_conocido + " no está añadido en el programa, intente registrarlo!");
                 }
-                
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR: el usuario " + name_user + " no está añadido en el programa, intente registrarlo!");
             }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error al leer el archivo de usuarios.");
         }
+        //COMPROBACIONES PARA EVITAR ERRORES MEDIANTE JOPTIONPANE
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error al leer el archivo de usuarios.");
+    }
 
     }//GEN-LAST:event_nextActionPerformed
 

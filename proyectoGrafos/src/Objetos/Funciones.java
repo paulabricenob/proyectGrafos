@@ -21,13 +21,18 @@ import org.graphstream.graph.implementations.*;
 import org.graphstream.ui.view.Viewer;
 
 /**
- *
- * @author diego
+
+ * Esta clase define las funciones referentes al txt, con la cual tiene diferentes atributos y funciones que lo definen
+
+ * @author: Vincenzo Miraglia, Paula Briceño, Nicola Colaruso
+
+ * @version: 24/10/2023/A
+
  */
 public class Funciones {
     //escribir en el txt
-    
-    
+    //Campos de la clase
+//Esta funcion de Funciones sirve para leer el txt proporcionado por el usuario en ventana numero 2, asi mismo tambien sirve paran en ciertas ocasiones poder volver a leer el txt y darselo a una funcion
     public String leer_txt(){
         String line;
         String usuarios_txt = "";
@@ -55,7 +60,7 @@ public class Funciones {
        return usuarios_txt;
     }
             
-    
+//esta funcion convierte el string del txt y lo retorna como una lista de personas.
     public Lista<Persona> ListaUsuarios(String txt){
         String data = txt;
         Lista<Persona> usuarios = new Lista<>();
@@ -84,7 +89,7 @@ public class Funciones {
         return usuarios;
    
     }
-
+//este metodo sirve para poder guardar nueva informacion en el txt gracias a que la escribe en forma de string en el.
     public void write_Txt(Lista usuarios ,String fileRoute) {
         if ("".equals(fileRoute)){
             JOptionPane.showMessageDialog(null, "Error! No hay ruta de acceso.");
@@ -117,7 +122,7 @@ public class Funciones {
             }
         }
     }
-    
+//este metodo es el visualizador del grafo, graci a la plataforma de visualizacion de grafos graphstream.com. En ella configuramos los dieferentes parametros para ver los nodos y sus arcos.
 public void Vergrafo(Lista usuarios) {
     Grafo u = new Grafo();
     System.setProperty("org.graphstream.ui", "swing");
@@ -140,7 +145,7 @@ public void Vergrafo(Lista usuarios) {
             String b = aux3.getData().getEnd();
             String c = a + b;
 
-            Edge edge = graph.addEdge(c, a, b);
+            Edge edge = graph.addEdge(c, a, b, true);
             edge.setAttribute("ui.label", "");
             aux3 = aux3.getNext();
         }
@@ -159,30 +164,4 @@ public void Vergrafo(Lista usuarios) {
 
 }
 
-    
 
-
- 
-       
-       
-       
-   /*           String str = "Usuarios\n";
-            if (usuarios.isEmpty() == false){
-                for (int x = 0; x < usuarios.len(); x++){
-                    Persona person = (Persona) usuarios.get(x);
-                    str =  str+ "@" + person.getName() + "\n";
-                    graph.addNode(person.getName());
-                }
-                str = str + "Relaciones\n";
-                for (int x = 0; x < usuarios.len(); x++){
-                    Persona person = (Persona) usuarios.get(x);
-                    Lista auxList = person.getconocidos();
-                    for (int y = 0; y < auxList.len(); y++){
-                        Arco edge = (Arco) auxList.get(y);
-                        if(edge != null){
-                            str += edge.getStart() + ", " + edge.getEnd() + "\n";
-                            graph.addEdge(edge.getStart()+edge.getEnd(), edge.getStart(), edge.getEnd());
-                        }
-                    }
-                }
-            }*/ 

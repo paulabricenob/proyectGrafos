@@ -6,11 +6,16 @@ package proyectografos;
 import GUI.Ventana1;
 
 /**
- *
- * @author paula
- */
-public class ProyectoGrafos {
 
+ * Esta es la clase que inicializa el proyecto mediante el main
+
+ * @author: Vincenzo Miraglia, Paula Briceño, Nicola Colaruso
+
+ * @version: 24/10/2023/A
+
+*/
+public class ProyectoGrafos {
+//Campos de la clase
     /**
      * @param args the command line arguments
      */

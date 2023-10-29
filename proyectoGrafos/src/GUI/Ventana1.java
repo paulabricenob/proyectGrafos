@@ -8,8 +8,13 @@ import Objetos.*;
 import TDatos.*;
 
 /**
- *
- * @author diego
+
+ * Esta clase define las ventanas en la cual se van a poder visualizar todas las funciones del proyecto, Asimismo importa diferentes atributos y funciones para su buen funcionamiento, como tambien posee diferentes comprobantes para evitar fallas en el proceso.
+
+ * @author: Vincenzo Miraglia, Paula Briceño, Nicola Colaruso
+
+ * @version: 24/10/2023/C
+
  */
 public class Ventana1 extends javax.swing.JFrame {
     Grafo grafo ;
@@ -68,6 +73,7 @@ public class Ventana1 extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         design4 = new javax.swing.JLabel();
         design5 = new javax.swing.JLabel();
+        Kosaraju = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -188,6 +194,14 @@ public class Ventana1 extends javax.swing.JFrame {
         design5.setText("->");
         jPanel1.add(design5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
 
+        Kosaraju.setText("Fuertemente conectados");
+        Kosaraju.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KosarajuActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Kosaraju, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, -1, -1));
+
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/descarga.jpeg"))); // NOI18N
         background.setText("X");
         jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 530));
@@ -204,33 +218,44 @@ public class Ventana1 extends javax.swing.JFrame {
 
     private void loadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFileActionPerformed
         Ventana2 v2 = new Ventana2(this);
+        //DESCARGAR Y GUARDAR TXT
     }//GEN-LAST:event_loadFileActionPerformed
 
     private void addUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserActionPerformed
         Ventana3 v3 = new Ventana3(this);
+        //AÑADIR USUARIOS DEL GRAFO
     }//GEN-LAST:event_addUserActionPerformed
 
     private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed
         Ventana4 v4 = new Ventana4(this);
+        //ELIMINAR USUARIOS DEL GRAFO
     }//GEN-LAST:event_deleteUserActionPerformed
 
     private void addConocidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConocidosActionPerformed
         Ventana5 v5 = new Ventana5(this);
+        //AÑADIR RELACIONES ENTRE USUARIOS AL GRAFO
     }//GEN-LAST:event_addConocidosActionPerformed
 
     private void deleteConocidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteConocidosActionPerformed
         Ventana6 v6 = new Ventana6(this);
+        //ELMINAR RELACIONES ENTRE USUARIOS AL GRAFO
     }//GEN-LAST:event_deleteConocidosActionPerformed
 
     private void showGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGraphActionPerformed
         Funciones funciones = new Funciones();
         Lista ur = grafo.getusuarios();
         funciones.Vergrafo(ur);
+        //VISUALIZADOR DEL GRAFO A TRAVES DE GRAPHSTREAM
     }//GEN-LAST:event_showGraphActionPerformed
 
     private void updateRepositoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRepositoryActionPerformed
         f.write_Txt(grafo.getusuarios(), "test\\usuarios.txt");
+        //GUARDAR REPOSITORIO
     }//GEN-LAST:event_updateRepositoryActionPerformed
+
+    private void KosarajuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KosarajuActionPerformed
+        // FUNCION KOSARAJU FUERTEMENTE CONECTADOS
+    }//GEN-LAST:event_KosarajuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,6 +295,7 @@ public class Ventana1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Kosaraju;
     private javax.swing.JButton addConocidos;
     private javax.swing.JButton addUser;
     private javax.swing.JLabel background;

@@ -142,7 +142,7 @@ public class Ventana2 extends javax.swing.JFrame {
         if (ans != JFileChooser.CANCEL_OPTION){
             File file_name = file.getSelectedFile();
             if(file_name.getName().equals("")){
-               
+               //COMPROBACIONES PARA EVITAR ERRORES MEDIANTE JOPTIONPANE
                 JOptionPane.showMessageDialog(this, "Error al abrir el archivo, revise que esté seleccionado el archivo");
             }else{
                     route.setText(file_name.getAbsolutePath());
@@ -169,24 +169,8 @@ public class Ventana2 extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Ventana2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
-    /*
-    private void savefile(){
-        try{
-           JFileChooser file = new JFileChooser();
-            file.showSaveDialog(this);
-            File save = file.getSelectedFile();
-            if (save != null){
-                FileWriter sav = new FileWriter(save +".txt");
-                sav.write(route.getText());
-                sav.close();
-                JOptionPane.showMessageDialog(null,"El archivo se guardó exitosament", "Información:", JOptionPane.INFORMATION_MESSAGE);
-            }
-        }catch(IOException err){
-            JOptionPane.showMessageDialog(null, err + "\n No se ha guardado el archivo", "Advertencia!!", JOptionPane.WARNING_MESSAGE);
-        
-        }
-    }
-    */
+
+    //METODO GUARDAR LOS ARCHIVOS MEDIANTE WRITETXT
     private void savefile(){
        String info = content.getText();
        try{

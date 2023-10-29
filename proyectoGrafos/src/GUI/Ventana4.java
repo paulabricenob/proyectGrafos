@@ -94,14 +94,14 @@ public class Ventana4 extends javax.swing.JFrame {
         this.setVisible(false);
         v1.setVisible(true);
     }//GEN-LAST:event_exitActionPerformed
-
+    //METODO PARA ELIMINAR USUARIO
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
         this.name_delete ="@" + nameUser.getText().toLowerCase();
         try{
             if (name_delete.isEmpty()){
                JOptionPane.showMessageDialog(null, "ERROR! Debe ingresar el nombre del usuario"); 
             }else{
-                
+                //COMPROBACIONES PARA EVITAR ERRORES MEDIANTE JOPTIONPANE
                 if (v1.grafo.EncontrarPersona(name_delete) != null){
                     v1.grafo.EliminarPorNombre(name_delete);
                     JOptionPane.showMessageDialog(null, "Se eliminó con éxito al usuario " + name_delete);
@@ -110,7 +110,7 @@ public class Ventana4 extends javax.swing.JFrame {
                 }else{
                     JOptionPane.showMessageDialog(null, "ERROR el usuario no está añadido en el programa, intente registrarlo!");
                 }
-
+//COMPROBACIONES PARA EVITAR ERRORES MEDIANTE JOPTIONPANE
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error al leer el archivo de usuarios.");

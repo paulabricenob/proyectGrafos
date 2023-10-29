@@ -7,67 +7,75 @@ package TDatos;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Enzo
+
+ * Esta clase define el objeto Lista, con la cual tiene diferentes atributos y funciones que lo definen 
+
+ * @author: Vincenzo Miraglia, Paula Briceño, Nicola Colaruso
+
+ * @version: 24/10/2023/A
+
  */
 public class Lista<T> {
 
     private Nodo head;
     private Nodo tail;
     private int size;
-    
-
+    //Campos de la clase
+    //constructor
     public Lista() {
         this.head = null;
         this.tail = null;
         this.size = 0;
     }
-    
+//getter
     public Nodo getHead() {
         return head;
     }
 
-
+//setter
     public void setHead(Nodo head) {
         this.head = head;
     }
 
-
+//getter
     public Nodo getTail() {
         return tail;
     }
 
-
+//setter
     public void setTail(Nodo tail) {
         this.tail = tail;
     }
 
-
+//getter
     public int getSize() {
         return size;
     }
 
-
+//setter
     public void setSize(int size) {
         this.size = size;
     }
     
-
+//funcion de la clase Lista para conocer si lita esta vacia
     public boolean isEmpty(){
         return head == null;
     }
     
+//funcion de la clase Lista para conocer tamaño lista
 
     public int len(){
         return getSize();
     }
     
+//metodo de la clase Lista para borrar lista
 
     public void delete(){
         head = null;
         tail = null;
         size = 0;
     }
+//metodo de la clase Lista para agregar datos
     
     public final void append(T data){
         Nodo newNode = new Nodo(data);
@@ -83,6 +91,7 @@ public class Lista<T> {
         }
     }
     
+//metodo de la clase Lista para pre agregar
 
     public void preappend(T data){
         Nodo newNode = new Nodo(data);
@@ -97,6 +106,7 @@ public class Lista<T> {
             size++;
         }
     }
+//funcion de la clase Lista para conocer puntero
 
     public T get(int position){
         Nodo pointer = head;
@@ -116,6 +126,7 @@ public class Lista<T> {
             return (T) pointer.getData();
         }
     }
+//metodo de la clase Lista para insertar nodos
 
     public void insert(int position, T data){
         boolean run = true;
@@ -142,6 +153,7 @@ public class Lista<T> {
             }
         }
     }
+//metodo de la clase Lista para eliminar y devolver como variable
 
     public void pop(int position){
         Nodo pointer = head;
@@ -165,6 +177,7 @@ public class Lista<T> {
             size--;
         }
     }
+//funcion de la clase Lista para buscar
 
     public int find(T data){
         if(head.getData() == data){
@@ -185,7 +198,8 @@ public class Lista<T> {
         return 0;
     }    
 
-    
+//metodo de la clase Lista para reemplazar informacion
+
     public void replace(int position, T data){
         boolean run = true;
  
@@ -213,6 +227,7 @@ public class Lista<T> {
             }
         }
     }    
+//funcion de la clase Lista para conocer existencia de un nodo
 
     public boolean exist(T data){
         if(head.getData() == data){
@@ -233,16 +248,5 @@ public class Lista<T> {
         return false;
     }
     
-    //public void insertNode(T x, Nodo <T> pValor){
-     // postinsertar.   
-      //  Nodo <T> pNew= new Nodo <>(x);
-        //if (this.isEmpty()){
-          //  this.head=pNew;
-        //}else{
-          //  pNew.setNext(pValor.getNext());
-            //pValor.setNext(pNew);
-      //  }
-        //size++;
-    //}
     
 }

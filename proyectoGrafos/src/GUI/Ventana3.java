@@ -101,7 +101,7 @@ public class Ventana3 extends javax.swing.JFrame {
         this.setVisible(false);
         v1.setVisible(true);
     }//GEN-LAST:event_exitActionPerformed
-
+    //METODO AÑADIR USUARIOS
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
         this.name_add = "@" + nameUser.getText().toLowerCase();
         try{
