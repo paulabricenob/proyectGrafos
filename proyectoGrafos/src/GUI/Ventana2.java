@@ -4,15 +4,12 @@
  */
 package GUI;
 
-import Objetos.Funciones;
-import Objetos.Persona;
-import TDatos.Grafo;
+
 import TDatos.Lista;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 //import java.lang.System.Logger;
 //import java.lang.System.Logger.Level;

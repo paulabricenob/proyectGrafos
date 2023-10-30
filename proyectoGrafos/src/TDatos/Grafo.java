@@ -6,7 +6,6 @@ package TDatos;
 //import Objetos.Funciones;
 import Objetos.Arco;
 import Objetos.Persona;
-import Objetos.Funciones;
 import javax.swing.JOptionPane;
 
 

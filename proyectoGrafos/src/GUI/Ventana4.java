@@ -4,7 +4,7 @@
  */
 package GUI;
 
-import Objetos.Persona;
+
 import javax.swing.JOptionPane;
 
 /**

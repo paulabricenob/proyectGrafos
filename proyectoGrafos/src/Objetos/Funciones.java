@@ -5,7 +5,6 @@
 package Objetos;
 
 
-import Objetos.Persona;
 import TDatos.Grafo;
 import TDatos.Lista;
 import TDatos.Nodo;
@@ -14,8 +13,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
-import java.io.IOException;
-import javax.swing.JFileChooser;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
 import org.graphstream.ui.view.Viewer;
