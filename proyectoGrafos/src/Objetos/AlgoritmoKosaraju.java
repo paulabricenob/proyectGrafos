@@ -16,7 +16,7 @@ package Objetos;
  */
 import java.util.*;
 import TDatos.*;
-
+//funcion para Kosaraju
 public class AlgoritmoKosaraju {
     Grafo graf = new Grafo();
     //Campos de la clase
@@ -26,20 +26,20 @@ public class AlgoritmoKosaraju {
         Pila<Persona> stack = new Pila<>();
         boolean[] visited = new boolean[usuarios.len()];
 
-        // Paso 1: Llenar la pila con el orden de los vértices visitados
+       
         for (int i = 0; i < usuarios.len(); i++) {
             if (!visited[i]) {
                 DFS(i, visited, stack, usuarios);
             }
         }
 
-        // Paso 2: Crear un grafo transpuesto
+        
         Grafo transposedGraph = getTransposedGraph(usuarios);
 
-        // Paso 3: Reiniciar el arreglo de visitados
+       
         Arrays.fill(visited, false);
 
-        // Paso 4: Realizar DFS en el grafo transpuesto
+       
         while (!stack.isEmpty()) {
             Nodo<Persona> vertex = stack.pop();
             Persona per = vertex.getData();
@@ -52,7 +52,7 @@ public class AlgoritmoKosaraju {
         }
     }
 
-    // Paso 2: Crear un grafo transpuesto
+  
     public Grafo getTransposedGraph(Lista<Persona> usuarios) {
         Grafo transposedGraph = new Grafo();
 
