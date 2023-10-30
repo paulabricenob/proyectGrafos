@@ -3,18 +3,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package proyectografos;
+import GUI.Ventana1;
 
 /**
- *
- * @author diego
- */
-public class ProyectoGrafos {
 
+ * Esta es la clase que inicializa el proyecto mediante el main
+
+ * @author: Vincenzo Miraglia, Paula Briceño, Nicola Colaruso
+
+ * @version: 24/10/2023/A
+
+*/
+public class ProyectoGrafos {
+//Campos de la clase
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+      
+        //instanciamos la ventana
+        Ventana1 ventana = new Ventana1();
+        ventana.setVisible(true);
+
     }
     
 }
